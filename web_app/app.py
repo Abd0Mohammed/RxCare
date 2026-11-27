@@ -1,4 +1,4 @@
-"""RxCare Pharmacy Management System — Streamlit Web Edition Entry Point.
+"""RxCare Pharmacy Management System — Bilingual Dark-First Streamlit Entry Point.
 
 Run locally with:
     streamlit run web_app/app.py
@@ -18,7 +18,8 @@ import streamlit as st
 
 from pharmacy.utils import format_currency
 from web_app.components.theme import inject_custom_css
-from web_app.config import APP_SUBTITLE, APP_VERSION, BRAND_NAME
+from web_app.config import APP_VERSION, BRAND_NAME, WEB_COLORS
+from web_app.core.i18n import NAV_PAGE_KEYS, SUPPORTED_LANGS, t
 from web_app.core.web_services import WebAppContainer, WebSessionController
 from web_app.pages_ui.alerts_page import render_alerts_page
 from web_app.pages_ui.dashboard_page import render_dashboard_page
@@ -35,15 +36,24 @@ def get_web_app_container() -> WebAppContainer:
     return WebAppContainer(seed_if_empty=True)
 
 
+def _nav_label(page_key: str, lang: str, alert_count: int) -> str:
+    if page_key == "alerts":
+        return t("nav_alerts", lang, count=alert_count)
+    return t(f"nav_{page_key}", lang)
+
+
 def main() -> None:
     st.set_page_config(
-        page_title=f"{BRAND_NAME} — {APP_SUBTITLE}",
+        page_title=f"{BRAND_NAME} — Pharmacy Management",
         page_icon="💊",
         layout="wide",
         initial_sidebar_state="expanded",
     )
 
-    inject_custom_css()
+    WebSessionController.ensure_initialized(st.session_state)
+    lang = WebSessionController.get_lang(st.session_state)
+    inject_custom_css(lang=lang)
+
     try:
         app = get_web_app_container()
     except NotImplementedError as exc:
@@ -51,67 +61,80 @@ def main() -> None:
         return
     except Exception as exc:
         print(f"RxCare Web startup error: {exc}", file=sys.stderr)
-        st.error("Unable to initialize the RxCare Web database. Please verify storage permissions and configuration.")
+        st.error(t("err_startup", lang))
         return
-
-    WebSessionController.ensure_initialized(st.session_state)
 
     stats = app.report_service.get_dashboard_stats()
     alert_count = stats.expired_count + stats.expiring_soon_count + stats.low_stock_count
 
     with st.sidebar:
-        st.markdown(f"## 💊 {BRAND_NAME}")
-        st.caption(f"{APP_SUBTITLE} • v{APP_VERSION}")
+        st.markdown(
+            f"""
+            <div style="padding: 0.25rem 0 0.5rem 0;">
+                <div style="font-size: 1.45rem; font-weight: 800; color: {WEB_COLORS['accent']};">
+                    💊 {BRAND_NAME}
+                </div>
+                <div style="font-size: 0.82rem; color: {WEB_COLORS['text_secondary']};">
+                    {t('app_subtitle', lang)} • {t('version_label', lang, version=APP_VERSION)}
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        # Persistent language switcher (does not reset cart or active page)
+        selected_lang = st.radio(
+            t("language_label", lang),
+            options=list(SUPPORTED_LANGS),
+            format_func=lambda code: t("lang_ar", code) if code == "ar" else t("lang_en", code),
+            horizontal=True,
+            key=WebSessionController.LANG_KEY,
+        )
+        if selected_lang != lang:
+            lang = selected_lang
+            inject_custom_css(lang=lang)
+
         st.markdown("---")
 
-        pages = [
-            "Dashboard",
-            "Medicine Management",
-            "Point of Sale",
-            "Inventory Management",
-            "Suppliers",
-            f"Expiry Alerts ({alert_count})",
-            "Reports",
-        ]
-        selected_label = st.radio(
-            "Navigation",
-            pages,
+        # Stable key-based navigation preserves current page and cart across language toggles
+        selected_page = st.radio(
+            t("nav_label", lang),
+            options=list(NAV_PAGE_KEYS),
+            format_func=lambda k: _nav_label(k, lang, alert_count),
             label_visibility="collapsed",
-            key="rxcare_nav_page",
+            key=WebSessionController.PAGE_KEY,
         )
 
         st.markdown("---")
         st.caption(
-            f"Active SKUs: **{stats.total_medicines}**  \n"
-            f"Today's Revenue: **{format_currency(stats.today_revenue)}**  \n"
-            f"Web DB: `{Path(app.db.db_path).name}`"
+            f"{t('sidebar_skus', lang)}: **{stats.total_medicines}**  \n"
+            f"{t('sidebar_today_rev', lang)}: **{format_currency(stats.today_revenue)}**  \n"
+            f"{t('sidebar_db', lang)}: `{Path(app.db.db_path).name}`"
         )
-        st.caption(
-            "Note: Local SQLite storage on ephemeral cloud containers resets on redeploy."
-        )
+        st.caption(t("sidebar_cloud_note", lang))
 
     flash_msg = WebSessionController.consume_flash_success(st.session_state)
     if flash_msg:
         st.success(flash_msg)
 
     try:
-        if selected_label == "Dashboard":
-            render_dashboard_page(app)
-        elif selected_label == "Medicine Management":
-            render_medicines_page(app)
-        elif selected_label == "Point of Sale":
-            render_pos_page(app)
-        elif selected_label == "Inventory Management":
-            render_inventory_page(app)
-        elif selected_label == "Suppliers":
-            render_suppliers_page(app)
-        elif selected_label.startswith("Expiry Alerts"):
-            render_alerts_page(app)
-        elif selected_label == "Reports":
-            render_reports_page(app)
+        if selected_page == "dashboard":
+            render_dashboard_page(app, lang=lang)
+        elif selected_page == "medicines":
+            render_medicines_page(app, lang=lang)
+        elif selected_page == "pos":
+            render_pos_page(app, lang=lang)
+        elif selected_page == "inventory":
+            render_inventory_page(app, lang=lang)
+        elif selected_page == "suppliers":
+            render_suppliers_page(app, lang=lang)
+        elif selected_page == "alerts":
+            render_alerts_page(app, lang=lang)
+        elif selected_page == "reports":
+            render_reports_page(app, lang=lang)
     except Exception as exc:
-        print(f"RxCare Web page error ({selected_label}): {exc}", file=sys.stderr)
-        st.error("An unexpected error occurred while processing your request. Please check your inputs and try again.")
+        print(f"RxCare Web page error ({selected_page}): {exc}", file=sys.stderr)
+        st.error(t("err_unexpected", lang))
 
 
 if __name__ == "__main__":

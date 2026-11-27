@@ -12,29 +12,35 @@ DATA_DIR = PROJECT_ROOT / "data"
 # Isolated from desktop database (data/pharmacy.db)
 DEFAULT_WEB_DB_PATH = DATA_DIR / "pharmacy_web.db"
 
-# Optional override for future persistent cloud DB integrations (e.g. PostgreSQL URL)
+# Optional override for future persistent cloud DB integrations
 WEB_DATABASE_URL = os.getenv("RXCARE_WEB_DB_URL", "").strip()
 WEB_DB_PATH_ENV = os.getenv("RXCARE_WEB_DB_PATH", "").strip()
 
 BRAND_NAME = "RxCare"
-APP_SUBTITLE = "Pharmacy Management Web Edition"
-APP_VERSION = "1.0.0"
+APP_VERSION = "2.0.0"
 
+# Dark-first SaaS Pharmacy Palette
 WEB_COLORS = {
-    "primary": "#0F766E",       # Medical teal/green
-    "primary_light": "#14B8A6",
-    "primary_soft": "#ECFDF5",
-    "bg_app": "#F4F7F6",
-    "bg_card": "#FFFFFF",
-    "border": "#DCE5E2",
-    "text_primary": "#0F2926",
-    "text_secondary": "#4B635E",
-    "success": "#15803D",
-    "success_bg": "#DCFCE7",
-    "warning": "#B45309",
-    "warning_bg": "#FEF3C7",
-    "danger": "#B91C1C",
-    "danger_bg": "#FEE2E2",
-    "info": "#0369A1",
-    "info_bg": "#E0F2FE",
+    "bg_app": "#171717",
+    "bg_surface": "#1F1F1F",
+    "bg_elevated": "#262626",
+    "bg_sidebar": "#121212",
+    "border": "#2E2E2E",
+    "text_primary": "#FFFFFF",
+    "text_secondary": "#A3A3A3",
+    "accent": "#B8FF38",
+    "accent_hover": "#A3E635",
+    "accent_text": "#111111",
+    "success": "#4ADE80",
+    "success_bg": "rgba(74, 222, 128, 0.14)",
+    "warning": "#FBBF24",
+    "warning_bg": "rgba(251, 191, 36, 0.14)",
+    "danger": "#F87171",
+    "danger_bg": "rgba(248, 113, 113, 0.15)",
+    "info": "#38BDF8",
+    "info_bg": "rgba(56, 189, 248, 0.14)",
+    # Legacy alias kept for backward compatibility
+    "primary": "#B8FF38",
+    "primary_light": "#38BDF8",
+    "bg_card": "#1F1F1F",
 }

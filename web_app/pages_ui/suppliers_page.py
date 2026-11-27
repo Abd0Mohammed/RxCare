@@ -1,4 +1,4 @@
-"""Suppliers directory page with full CRUD and referential integrity checks."""
+"""Suppliers directory page: bilingual CRUD with referential integrity checks."""
 
 from __future__ import annotations
 
@@ -6,57 +6,55 @@ import streamlit as st
 
 from pharmacy.utils import BusinessRuleError, ValidationError
 from web_app.components.theme import render_page_header
+from web_app.core.i18n import localize_error, t
 from web_app.core.web_services import WebAppContainer, WebSessionController
 
 
-def render_suppliers_page(app: WebAppContainer) -> None:
+def render_suppliers_page(app: WebAppContainer, lang: str = "ar") -> None:
     """Render Supplier CRUD directory."""
-    render_page_header(
-        "Suppliers",
-        "Manage wholesale pharmaceutical vendors, contact details, and linked SKU counts.",
-    )
+    render_page_header(t("sup_title", lang), t("sup_subtitle", lang))
 
     tab_list, tab_add, tab_edit = st.tabs(
-        ["Supplier Directory", "Add Supplier", "Edit / Delete Supplier"]
+        [t("sup_tab_list", lang), t("sup_tab_add", lang), t("sup_tab_edit", lang)]
     )
 
     with tab_list:
         search_q = st.text_input(
-            "Search Suppliers",
-            placeholder="Name, contact person, phone, or email...",
+            t("sup_search_label", lang),
+            placeholder=t("sup_search_ph", lang),
             key="sup_search_q",
         )
         suppliers = app.supplier_service.list_suppliers(search_query=search_q)
         if suppliers:
             rows = [
                 {
-                    "ID": s.id,
-                    "Supplier Name": s.name,
-                    "Contact Person": s.contact_person,
-                    "Phone": s.phone,
-                    "Email": s.email,
-                    "Address": s.address,
-                    "Linked SKUs": s.medicine_count,
+                    t("col_id", lang): s.id,
+                    t("col_supplier", lang): s.name,
+                    t("col_contact", lang): s.contact_person,
+                    t("col_phone", lang): s.phone,
+                    t("col_email", lang): s.email,
+                    t("col_address", lang): s.address,
+                    t("col_linked_skus", lang): s.medicine_count,
                 }
                 for s in suppliers
             ]
             st.dataframe(rows, use_container_width=True, hide_index=True)
         else:
-            st.info("No suppliers match your search.")
+            st.info(t("sup_empty_search", lang))
 
     with tab_add:
         with st.form("add_supplier_form", clear_on_submit=True):
-            st.subheader("Add New Supplier")
+            st.subheader(t("sup_add_heading", lang))
             c1, c2 = st.columns(2)
             with c1:
-                name = st.text_input("Supplier Name *")
-                contact = st.text_input("Contact Person")
-                phone = st.text_input("Phone Number")
+                name = st.text_input(t("sup_field_name", lang))
+                contact = st.text_input(t("sup_field_contact", lang))
+                phone = st.text_input(t("sup_field_phone", lang))
             with c2:
-                email = st.text_input("Email Address")
-                address = st.text_area("Street Address", height=96)
+                email = st.text_input(t("sup_field_email", lang))
+                address = st.text_area(t("sup_field_address", lang), height=96)
 
-            submitted = st.form_submit_button("Create Supplier", type="primary")
+            submitted = st.form_submit_button(t("sup_btn_create", lang), type="primary")
             if submitted:
                 try:
                     created = app.supplier_service.create_supplier(
@@ -67,40 +65,44 @@ def render_suppliers_page(app: WebAppContainer) -> None:
                         address=address,
                     )
                     WebSessionController.set_flash_success(
-                        st.session_state, f"Supplier '{created.name}' added."
+                        st.session_state, t("sup_flash_added", lang, name=created.name)
                     )
                     st.rerun()
                 except ValidationError as exc:
-                    st.error(str(exc))
+                    st.error(localize_error(exc, lang))
 
     with tab_edit:
         suppliers = app.supplier_service.list_suppliers()
         if not suppliers:
-            st.info("No suppliers available to edit.")
+            st.info(t("sup_none_edit", lang))
             return
 
         sup_map = {
-            f"#{s.id} — {s.name} ({s.medicine_count} linked SKUs)": s
+            f"#{s.id} — {s.name} ({t('col_linked_skus', lang)}: {s.medicine_count})": s
             for s in suppliers
             if s.id is not None
         }
         chosen_key = st.selectbox(
-            "Select Supplier", list(sup_map.keys()), key="sup_edit_select"
+            t("sup_select_edit", lang), list(sup_map.keys()), key="sup_edit_select"
         )
         target = sup_map[chosen_key]
 
         with st.form(f"edit_supplier_form_{target.id}"):
-            st.subheader(f"Editing {target.name}")
+            st.subheader(t("sup_editing_heading", lang, name=target.name))
             c1, c2 = st.columns(2)
             with c1:
-                e_name = st.text_input("Supplier Name *", value=target.name)
-                e_contact = st.text_input("Contact Person", value=target.contact_person)
-                e_phone = st.text_input("Phone Number", value=target.phone)
+                e_name = st.text_input(t("sup_field_name", lang), value=target.name)
+                e_contact = st.text_input(
+                    t("sup_field_contact", lang), value=target.contact_person
+                )
+                e_phone = st.text_input(t("sup_field_phone", lang), value=target.phone)
             with c2:
-                e_email = st.text_input("Email Address", value=target.email)
-                e_address = st.text_area("Street Address", value=target.address, height=96)
+                e_email = st.text_input(t("sup_field_email", lang), value=target.email)
+                e_address = st.text_area(
+                    t("sup_field_address", lang), value=target.address, height=96
+                )
 
-            saved = st.form_submit_button("Update Supplier", type="primary")
+            saved = st.form_submit_button(t("sup_btn_update", lang), type="primary")
             if saved and target.id is not None:
                 try:
                     updated = app.supplier_service.update_supplier(
@@ -112,22 +114,21 @@ def render_suppliers_page(app: WebAppContainer) -> None:
                         address=e_address,
                     )
                     WebSessionController.set_flash_success(
-                        st.session_state, f"Updated supplier '{updated.name}'."
+                        st.session_state,
+                        t("sup_flash_updated", lang, name=updated.name),
                     )
                     st.rerun()
                 except ValidationError as exc:
-                    st.error(str(exc))
+                    st.error(localize_error(exc, lang))
 
-        with st.expander("Danger Zone — Delete Supplier"):
-            st.warning(
-                "Suppliers linked to existing medicine batches cannot be deleted until medicines are reassigned or removed."
-            )
+        with st.expander(t("sup_danger_zone", lang)):
+            st.warning(t("sup_delete_warn", lang))
             confirm_del = st.checkbox(
-                f"I confirm deleting supplier '{target.name}'",
+                t("sup_confirm_delete", lang, name=target.name),
                 key=f"confirm_del_sup_{target.id}",
             )
             if st.button(
-                "Delete Supplier",
+                t("sup_btn_delete", lang),
                 disabled=not confirm_del,
                 key=f"btn_del_sup_{target.id}",
             ):
@@ -135,8 +136,9 @@ def render_suppliers_page(app: WebAppContainer) -> None:
                     try:
                         app.supplier_service.delete_supplier(target.id)
                         WebSessionController.set_flash_success(
-                            st.session_state, f"Deleted supplier '{target.name}'."
+                            st.session_state,
+                            t("sup_flash_deleted", lang, name=target.name),
                         )
                         st.rerun()
                     except (ValidationError, BusinessRuleError) as exc:
-                        st.error(str(exc))
+                        st.error(localize_error(exc, lang))

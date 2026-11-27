@@ -248,6 +248,61 @@ class WebEditionTestCase(unittest.TestCase):
         with self.assertRaises(ValidationError):
             self.app.analytics_service.get_daily_sales_series("invalid-date", self.today_str)
 
+    def test_bilingual_i18n_parity_cart_preservation_and_shaping(self) -> None:
+        from pharmacy.utils import BusinessRuleError as CoreBusinessRuleError
+        from web_app.core.arabic_shape import format_arabic_for_matplotlib
+        from web_app.core.i18n import (
+            DEFAULT_LANG,
+            TRANSLATIONS,
+            localize_error,
+            t,
+            translate_payment_method,
+        )
+
+        self.assertEqual(DEFAULT_LANG, "ar")
+        ar_keys = set(TRANSLATIONS["ar"].keys())
+        en_keys = set(TRANSLATIONS["en"].keys())
+        self.assertEqual(ar_keys, en_keys)
+
+        med = self.app.inventory_service.create_medicine(
+            name="Azithromycin",
+            category="Antibiotics",
+            batch_number="I18N-1",
+            cost_price=4.0,
+            unit_price=10.0,
+            quantity=10,
+            expiry_date=self.future_date,
+        )
+        assert med.id is not None
+
+        session_state: dict[str, object] = {}
+        WebSessionController.ensure_initialized(session_state)
+        self.assertEqual(WebSessionController.get_lang(session_state), "ar")
+        WebSessionController.set_page_key(session_state, "pos")
+        WebSessionController.add_to_cart(session_state, self.app.sales_service, med.id, 2)
+        token_before = session_state[WebSessionController.TOKEN_KEY]
+
+        # Switch language to English and back to Arabic; cart, page, and token must remain intact
+        WebSessionController.set_lang(session_state, "en")
+        self.assertEqual(WebSessionController.get_page_key(session_state), "pos")
+        self.assertEqual(len(WebSessionController.get_cart(session_state)), 1)
+        self.assertEqual(session_state[WebSessionController.TOKEN_KEY], token_before)
+
+        WebSessionController.set_lang(session_state, "ar")
+        self.assertEqual(WebSessionController.get_cart(session_state)[med.id].quantity, 2)
+        self.assertEqual(translate_payment_method("Cash", "ar"), "نقداً")
+        self.assertEqual(t("pos_title", "en"), "Point of Sale (POS)")
+
+        err_msg = localize_error(
+            CoreBusinessRuleError("Sale blocked: 'Old' (Batch B1) expired on 2025-01-01."),
+            "ar",
+        )
+        self.assertIn("تم حظر البيع", err_msg)
+
+        shaped = format_arabic_for_matplotlib("الإيرادات ($)")
+        self.assertIn("($)", shaped)
+        self.assertNotEqual(shaped, "الإيرادات ($)")
+
 
 if __name__ == "__main__":
     unittest.main()

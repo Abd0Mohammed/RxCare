@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RxCare — الدليل التعليمي الشامل للمشروع</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm;
+      @bottom-center {
+        content: counter(page);
+        font-family: "Cairo", "Noto Sans Arabic", sans-serif;
+        font-size: 9pt;
+        color: #525252;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Cairo", "Noto Sans Arabic", "Segoe UI", sans-serif;
+      color: #171717;
+      background: #ffffff;
+      line-height: 1.75;
+      margin: 0;
+      padding: 0;
+    }
+    .cover {
+      background: #171717;
+      color: #ffffff;
+      padding: 48px 40px;
+      border-radius: 14px;
+      margin: 24px auto;
+      max-width: 920px;
+      border-right: 8px solid #B8FF38;
+      page-break-after: always;
+    }
+    .cover .badge {
+      display: inline-block;
+      background: #B8FF38;
+      color: #111111;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      margin-bottom: 18px;
+    }
+    .cover h1 {
+      font-size: 2.2rem;
+      margin: 0 0 12px 0;
+      color: #ffffff;
+      border: none;
+    }
+    .cover p {
+      color: #d4d4d4;
+      font-size: 1.05rem;
+      margin: 6px 0;
+    }
+    .container {
+      max-width: 920px;
+      margin: 0 auto 48px auto;
+      padding: 0 24px;
+    }
+    h1 {
+      font-size: 1.7rem;
+      color: #171717;
+      border-bottom: 3px solid #B8FF38;
+      padding-bottom: 6px;
+      margin-top: 28px;
+    }
+    h2 {
+      font-size: 1.35rem;
+      color: #171717;
+      background: #f5f5f5;
+      border-right: 5px solid #B8FF38;
+      padding: 8px 14px;
+      border-radius: 6px;
+      margin-top: 28px;
+    }
+    h2.chapter-heading {
+      page-break-before: auto;
+    }
+    h3 {
+      font-size: 1.12rem;
+      color: #262626;
+      margin-top: 20px;
+    }
+    h4 {
+      font-size: 1rem;
+      color: #404040;
+      margin-top: 16px;
+    }
+    p, li {
+      font-size: 0.98rem;
+    }
+    code {
+      font-family: "JetBrains Mono", "DejaVu Sans Mono", Consolas, monospace;
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.88em;
+      unicode-bidi: isolate;
+    }
+    pre {
+      background: #171717;
+      color: #f8fafc;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border-left: 4px solid #B8FF38;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      text-align: left;
+    }
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 20px 0;
+      font-size: 0.92rem;
+    }
+    th, td {
+      border: 1px solid #d4d4d4;
+      padding: 8px 10px;
+      text-align: right;
+      vertical-align: top;
+    }
+    th {
+      background: #171717;
+      color: #B8FF38;
+      font-weight: 700;
+    }
+    tr:nth-child(even) td {
+      background: #fafafa;
+    }
+    blockquote {
+      background: #f7fee7;
+      border-right: 4px solid #65a30d;
+      padding: 10px 14px;
+      margin: 14px 0;
+      border-radius: 6px;
+      color: #1f2937;
+    }
+    a {
+      color: #0f766e;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #e5e5e5;
+      margin: 24px 0;
+    }
+    @media print {
+      .container { max-width: 100%; padding: 0; }
+      .cover { margin: 0; max-width: 100%; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      th, pre { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="badge">RxCare Pharmacy Management System • v2.0</div>
+    <h1>الدليل التعليمي والمعماري الشامل لمشروع RxCare</h1>
+    <p>شرح متكامل لتصميم وبناء النسخة المكتبية (Tkinter) ونسخة الويب ثنائية اللغة (Streamlit)</p>
+    <p>موجّه لطلاب نظم المعلومات وهندسة البرمجيات للاستعداد لمناقشة مشروع التخرج</p>
+  </div>
+  <div class="container">
+    <h1 id="rxcare-نظام-إدارة-الصيدلية">RxCare — نظام إدارة الصيدلية</h1>
+<h2 id="الدليل-التعليمي-والمعماري-الشامل-لمناقشة-مشروع-التخرج">الدليل التعليمي والمعماري الشامل لمناقشة مشروع التخرج</h2>
+<ul>
+<li><strong>اسم المشروع:</strong> RxCare Pharmacy Management System (Desktop &amp; Bilingual Web Editions)</li>
+<li><strong>التقنيات الأساسية:</strong> Python 3.11 · Streamlit · Tkinter / ttk · SQLite 3 · Matplotlib</li>
+<li><strong>تاريخ الإعداد:</strong> 2026-11-27</li>
+<li><strong>الفئة المستهدفة:</strong> طلاب نظم المعلومات الإدارية وهندسة البرمجيات (مستوى مبتدئ إلى متوسط)</li>
+</ul>
+<blockquote><strong>ملاحظة حول تحويل هذا الملف إلى PDF:</strong></blockquote>
+<blockquote>تعذّر توليد ملف <code dir="ltr">RxCare_Complete_Project_Guide.pdf</code> مباشرة داخل بيئة الخادم السحابية لعدم توفر محرك تحويل يدعم ربط الحروف العربية واتجاه RTL (<code dir="ltr">WeasyPrint</code> أو <code dir="ltr">XeLaTeX</code> أو <code dir="ltr">Chromium</code>). يمكنك تحويل هذا الملف أو ملف <code dir="ltr">docs/RxCare_Complete_Project_Guide.html</code> المرفق إلى PDF بسهولة تامة عبر التعليمات الموجودة في نهاية هذا الدليل.</blockquote>
+<hr />
+<h2 id="فهرس-المحتويات">فهرس المحتويات</h2>
+<ol>
+<li><a href="#الفصل-الأول--مقدمة-المشروع">الفصل الأول — مقدمة المشروع (Project Introduction)</a></li>
+<li><a href="#الفصل-الثاني--حزمة-التقنيات-المستخدمة">الفصل الثاني — حزمة التقنيات المستخدمة (Technology Stack)</a></li>
+<li><a href="#الفصل-الثالث--معمارية-المشروع">الفصل الثالث — معمارية المشروع (Project Architecture)</a></li>
+<li><a href="#الفصل-الرابع--تصميم-قاعدة-البيانات">الفصل الرابع — تصميم قاعدة البيانات (Database Design)</a></li>
+<li><a href="#الفصل-الخامس--مفاهيم-برمجة-بايثون-المستخدمة">الفصل الخامس — مفاهيم برمجة بايثون المستخدمة في الكود</a></li>
+<li><a href="#الفصل-السادس--شرح-وحدات-التطبيق">الفصل السادس — شرح وحدات التطبيق (Application Modules)</a></li>
+<li><a href="#الفصل-السابع--جولة-تفصيلية-في-أهم-دوال-الكود">الفصل السابع — جولة تفصيلية في أهم دوال الكود الحقيقي</a></li>
+<li><a href="#الفصل-الثامن--آلية-تشغيل-التطبيق-والنشر">الفصل الثامن — آلية تشغيل التطبيق والنشر السحابي</a></li>
+<li><a href="#الفصل-التاسع--الاختبارات-ومعالجة-الأخطاء">الفصل التاسع — الاختبارات ومعالجة الأخطاء (Testing &amp; Error Handling)</a></li>
+<li><a href="#الفصل-العاشر--الأمان-والقيود">الفصل العاشر — الأمان والقيود الحالية (Security &amp; Limitations)</a></li>
+<li><a href="#الفصل-الحادي-عشر--دليل-التشغيل-والصيانة">الفصل الحادي عشر — دليل التشغيل والصيانة (Run &amp; Maintenance)</a></li>
+<li><a href="#الفصل-الثاني-عشر--التحسينات-المستقبلية">الفصل الثاني عشر — التحسينات المستقبلية (Future Improvements)</a></li>
+<li><a href="#الفصل-الثالث-عشر--أسئلة-المناقشة-الجامعية">الفصل الثالث عشر — بنك أسئلة المناقشة الجامعية (45 سؤالاً وإجابة)</a></li>
+<li><a href="#الفصل-الرابع-عشر--نص-العرض-العملي">الفصل الرابع عشر — نص العرض العملي أمام لجنة المناقشة (Demo Script)</a></li>
+</ol>
+<hr />
+<h2 class="chapter-heading" id="الفصل-الأول-مقدمة-المشروع">الفصل الأول — مقدمة المشروع</h2>
+<h3 id="11-ما-هو-نظام-rxcare؟">1.1 ما هو نظام RxCare؟</h3>
+<p><strong>RxCare</strong> هو نظام متكامل لإدارة الصيدليات (Pharmacy Management System) صُمّم وبُرمج بلغة <strong>Python 3</strong> مع قاعدة بيانات علائقية <strong>SQLite</strong>. يضم المشروع نسختين تشغيليتين متكاملتين تتشاركان نفس منطق الأعمال (Business Logic):</p>
+<ol>
+<li><strong>النسخة المكتبية (Desktop Edition):</strong> تعمل محلياً باستخدام مكتبة الواجهات الرسومية القياسية <code dir="ltr">Tkinter / ttk</code> عبر نقطة الدخول <code dir="ltr">main.py</code> وقاعدة بيانات <code dir="ltr">data/pharmacy.db</code>.</li>
+<li><strong>نسخة الويب ثنائية اللغة (Bilingual Web Edition):</strong> تعمل عبر المتصفح باستخدام إطار العمل <code dir="ltr">Streamlit</code> عبر نقطة الدخول <code dir="ltr">web_app/app.py</code> وقاعدة بيانات معزولة <code dir="ltr">data/pharmacy_web.db</code> مع دعم كامل للغة العربية (RTL) والإنجليزية (LTR).</li>
+</ol>
+<h3 id="12-المشكلة-التي-يعالجها-النظام">1.2 المشكلة التي يعالجها النظام</h3>
+<p>تواجه الصيدليات الصغيرة والمتوسطة عند الاعتماد على الدفاتر الورقية أو جداول البيانات التقليدية (Excel) عدة مخاطر تشغيلية وصحية:</p>
+<ul>
+<li><strong>بيع أدوية منتهية الصلاحية (Expired Medicines):</strong> الخطأ البشري في قراءة تاريخ الصلاحية يهدد سلامة المرضى ويعرض الصيدلية للمساءلة القانونية.</li>
+<li><strong>نقص المخزون المفاجئ (Stock-outs):</strong> عدم وجود تنبيه مبكر عند انخفاض الرصيد عن حد إعادة الطلب (<code dir="ltr">reorder_level</code>).</li>
+<li><strong>تضارب الحسابات والأرباح:</strong> صعوبة تتبع سعر التكلفة (<code dir="ltr">cost_price</code>) مقارنة بسعر البيع (<code dir="ltr">unit_price</code>) وحساب الخصومات والضرائب وصافي الربح اليومي بدقة.</li>
+<li><strong>انقطاع الترابط بين المشتريات والمبيعات:</strong> صعوبة معرفة أي مورد (<code dir="ltr">Supplier</code>) يزود الصيدلية بكل تشغيلة (<code dir="ltr">Batch</code>).</li>
+</ul>
+<h3 id="13-لماذا-تحتاج-إدارة-الصيدلية-إلى-برمجيات-متخصصة؟">1.3 لماذا تحتاج إدارة الصيدلية إلى برمجيات متخصصة؟</h3>
+<p>الصيدلية ليست متجراً عادياً؛ فهي تتعامل مع <strong>تشغيلات دوائية (Batches)</strong> لكل منها تاريخ صلاحية مختلف (<code dir="ltr">expiry_date</code>) وقيود بيع صارمة. البرمجية المتخصصة تفرض قواعد السلامة آلياً (مثل منع بيع الدواء المنتهي في نقطة البيع على مستوى الخدمة وقاعدة البيانات)، وتضمن <strong>الذرية في المعاملات (Atomic Transactions)</strong> بحيث لا ينقص المخزون دون إصدار فاتورة، ولا تُصدر فاتورة دون خصم المخزون.</p>
+<h3 id="14-أهداف-المشروع">1.4 أهداف المشروع</h3>
+<ol>
+<li>أتمتة دورة حياة الدواء من التوريد حتى البيع للعميل.</li>
+<li>منع صرف أو بيع أي تشغيلة دوائية منتهية الصلاحية برمجياً.</li>
+<li>توفير نقطة بيع سريعة (<code dir="ltr">POS</code>) تحسب الإجمالي والخصم والضريبة وصافي الربح تلقائياً.</li>
+<li>إنشاء سجل تدقيق (<code dir="ltr">stock_adjustments</code>) يوثّق كل زيادة أو نقصان في المخزون.</li>
+<li>تقديم لوحة تحكم وتقارير مالية ورسوم بيانية لدعم اتخاذ القرار.</li>
+<li>دعم المستخدم العربي والأجنبي بواجهة ثنائية اللغة (عربي RTL / إنجليزي LTR).</li>
+</ol>
+<h3 id="15-نطاق-المشروع-وحدوده-scope-limitations">1.5 نطاق المشروع وحدوده (Scope &amp; Limitations)</h3>
+<ul>
+<li><strong>ضمن النطاق:</strong> إدارة الأدوية والتشغيلات، إدارة الموردين، نقطة البيع والفواتير، تنبيهات الصلاحية وانخفاض المخزون، شطب المخزون المنتهي، التقارير اليومية وتصدير CSV، واجهة مكتبية وواجهة ويب سحابية.</li>
+<li><strong>خارج النطاق حالياً (القيود):</strong> لا يوجد نظام تسجيل دخول وصلاحيات مستخدمين (Authentication/RBAC) في النسخة الحالية، وقاعدة البيانات الافتراضية على الاستضافة السحابية المجانية هي ملف SQLite محلي مؤقت.</li>
+</ul>
+<h3 id="16-المتطلبات-الوظيفية-وغير-الوظيفية">1.6 المتطلبات الوظيفية وغير الوظيفية</h3>
+<p><strong>المتطلبات الوظيفية (Functional Requirements):</strong></p>
+<ul>
+<li>عمليات CRUD الكاملة للأدوية والموردين.</li>
+<li>البحث والتصفية حسب الاسم، الاسم العلمي، رقم التشغيلة، التصنيف، أو حالة التوفر.</li>
+<li>التحقق في POS من الصلاحية وتوفر الكمية وحساب المجموع والخصم والضريبة والربح.</li>
+<li>تقارير زمنية وتصدير CSV.</li>
+</ul>
+<p><strong>المتطلبات غير الوظيفية (Non-Functional Requirements):</strong></p>
+<ul>
+<li><strong>الموثوقية وسلامة البيانات (Data Integrity):</strong> استخدام معاملات SQLite الذرية والقيود المرجعية (<code dir="ltr">FOREIGN KEY</code> و <code dir="ltr">CHECK</code>).</li>
+<li><strong>الأداء وتعدد الخيوط (Thread Safety):</strong> استخدام قفل <code dir="ltr">threading.RLock</code> ووضع <code dir="ltr">WAL</code> في نسخة الويب.</li>
+<li><strong>قابلية الصيانة (Maintainability):</strong> فصل الطبقات (UI / Services / Models / Database).</li>
+<li><strong>سهولة الوصول (Accessibility &amp; Localization):</strong> تصميم داكن واضح التباين مع دعم RTL كامل للغة العربية.</li>
+</ul>
+<hr />
+<h2 class="chapter-heading" id="الفصل-الثاني-حزمة-التقنيات-المستخدمة">الفصل الثاني — حزمة التقنيات المستخدمة</h2>
+<table>
+<tr><th>التقنية</th><th>الدور في المشروع</th><th>لماذا تم اختيارها؟</th></tr>
+<tr><td><strong>Python 3 (3.11)</strong></td><td>اللغة الأساسية لبناء كامل المنظومة</td><td>سهلة القراءة، غنية بالمكتبات القياسية، وتدعم البرمجة كائنية التوجه (<code dir="ltr">OOP</code>) وتكامل الويب وسطح المكتب معاً.</td></tr>
+<tr><td><strong>Tkinter / ttk</strong></td><td>واجهة المستخدم للنسخة المكتبية (<code dir="ltr">pharmacy/ui/</code>)</td><td>تأتي مدمجة مع بايثون (Standard Library) ولا تتطلب تثبيت حزم خارجية لتشغيل التطبيق محلياً.</td></tr>
+<tr><td><strong>Streamlit</strong></td><td>إطار عمل واجهة الويب التفاعلية (<code dir="ltr">web_app/</code>)</td><td>يحول كود بايثون مباشرة إلى تطبيق ويب حديث ومتجاوب دون كتابة خادم REST منفصل أو كود JavaScript معقد.</td></tr>
+<tr><td><strong>SQLite 3</strong></td><td>محرك قاعدة البيانات العلائقية المدمج</td><td>خفيف الوزن، يعمل كملف واحد (<code dir="ltr">pharmacy.db</code> / <code dir="ltr">pharmacy_web.db</code>)، يدعم معاملات <code dir="ltr">ACID</code> والقيود العلائقية، ولا يحتاج خادم قواعد بيانات مستقل للتشغيل الأولي.</td></tr>
+<tr><td><strong>Matplotlib</strong></td><td>توليد الرسوم البيانية في صفحة التقارير</td><td>مكتبة قياسية موثوقة تتيح تخصيص الألوان الداكنة وإنتاج مخططات الإيرادات والأرباح وتقييم المخزون بسهولة.</td></tr>
+<tr><td><strong>OOP (البرمجة كائنية التوجه)</strong></td><td>تنظيم الكيانات (<code dir="ltr">dataclasses</code>) والخدمات (<code dir="ltr">Services</code>)</td><td>تمنع تكرار الكود وتفصل قواعد العمل عن الواجهة الرسومية، مما سمح بإعادة استخدام نفس الخدمات في Desktop و Web.</td></tr>
+<tr><td><strong>Git &amp; GitHub</strong></td><td>نظام التحكم بالإصدارات واستضافة الشيفرة</td><td>يحفظ تاريخ التعديلات ويربط المشروع مباشرة بمنصة النشر السحابي.</td></tr>
+<tr><td><strong>Streamlit Community Cloud</strong></td><td>منصة الاستضافة السحابية المجانية لنسخة الويب</td><td>تنشر تطبيقات Streamlit مباشرة من مستودع GitHub عبر تحديد ملف الدخول <code dir="ltr">web_app/app.py</code>.</td></tr>
+</table>
+<hr />
+<h2 class="chapter-heading" id="الفصل-الثالث-معمارية-المشروع">الفصل الثالث — معمارية المشروع</h2>
+<h3 id="31-الهيكل-التنظيمي-للمجلدات-folder-structure">3.1 الهيكل التنظيمي للمجلدات (Folder Structure)</h3>
+<pre dir="ltr"><code>/
+├── main.py                          # نقطة دخول النسخة المكتبية (Tkinter)
+├── requirements.txt                 # متطلبات النسخة المكتبية
+├── README.md                        # توثيق النسخة المكتبية
+├── DISCUSSION_GUIDE.md              # ملخص معماري مختصر
+├── .streamlit/
+│   └── config.toml                  # إعدادات السمة الداكنة لـ Streamlit
+├── pharmacy/                        # الحزمة المشتركة (المنطق الأساسي + واجهة سطح المكتب)
+│   ├── config.py                    # الثوابت والإعدادات العامة
+│   ├── utils.py                     # دوال التحقق، التواريخ، فحص الصلاحية، وتصدير CSV
+│   ├── models/
+│   │   └── entities.py              # الكيانات (Supplier, Medicine, CartItem, Sale, ...)
+│   ├── database/
+│   │   └── db_manager.py            # إدارة اتصال SQLite، الجداول، المعاملات، والبيانات الأولية
+│   ├── services/
+│   │   ├── supplier_service.py      # منطق إدارة الموردين
+│   │   ├── inventory_service.py     # منطق المخزون والأدوية والتعديلات
+│   │   ├── sales_service.py         # منطق نقطة البيع والحسابات والمعاملات الذرية
+│   │   └── report_service.py        # إحصائيات لوحة التحكم والتقارير
+│   └── ui/                          # واجهات Tkinter للنسخة المكتبية فقط
+├── web_app/                         # نسخة الويب المستقلة (Streamlit)
+│   ├── app.py                       # نقطة دخول نسخة الويب + التوجيه + مبدل اللغة
+│   ├── config.py                    # ألوان السمة الداكنة ومسار قاعدة الويب المعزولة
+│   ├── requirements.txt             # اعتماديات الاستضافة السحابية (streamlit, matplotlib)
+│   ├── core/
+│   │   ├── db_adapter.py            # محول SQLite آمن للخيوط + واجهة DatabaseBackend
+│   │   ├── web_services.py          # تحليلات الأرباح + وحدة تحكم السلة ومنع التكرار
+│   │   ├── i18n.py                  # القاموس المركزي العربي/الإنجليزي ومترجم الأخطاء
+│   │   └── arabic_shape.py          # تشكيل الحروف العربية للرسوم البيانية في Matplotlib
+│   ├── components/
+│   │   ├── theme.py                 # تنسيقات CSS الداكنة واتجاهات RTL/LTR وبطاقات KPI
+│   │   └── charts.py                # بناء مخططات Matplotlib بالوضع الداكن
+│   └── pages_ui/                    # الصفحات السبع للويب
+├── tests/
+│   ├── test_pharmacy_system.py      # اختبارات النسخة المكتبية والخدمات الأساسية (6 اختبارات)
+│   └── test_web_edition.py          # اختبارات نسخة الويب والتوطين وتعدد الخيوط (6 اختبارات)
+└── docs/
+    ├── RxCare_Complete_Project_Guide.md
+    └── RxCare_Complete_Project_Guide.html</code></pre>
+<h3 id="32-فصل-الطبقات-layered-architecture">3.2 فصل الطبقات (Layered Architecture)</h3>
+<p>اعتمد المشروع نمط <strong>العمارة الطبقية (Layered Architecture)</strong> المكون من 4 طبقات:</p>
+<ol>
+<li><strong>طبقة العرض (Presentation Layer):</strong> مسؤولة فقط عن عرض البيانات واستقبال المدخلات (<code dir="ltr">pharmacy/ui/</code> لسطح المكتب، و <code dir="ltr">web_app/pages_ui/</code> للويب).</li>
+<li><strong>طبقة الخدمات (Service Layer):</strong> تحتوي على جميع القواعد التجارية والحسابات والتحقق (<code dir="ltr">SupplierService</code>, <code dir="ltr">InventoryService</code>, <code dir="ltr">SalesService</code>, <code dir="ltr">ReportService</code>, <code dir="ltr">WebAnalyticsService</code>).</li>
+<li><strong>طبقة النماذج (Domain Models Layer):</strong> تمثل هياكل البيانات النظيفة (<code dir="ltr">@dataclass</code> في <code dir="ltr">pharmacy/models/entities.py</code>).</li>
+<li><strong>طبقة البيانات (Database Layer):</strong> تتولى الاتصال بـ SQLite وتنفيذ الاستعلامات والمعاملات (<code dir="ltr">DatabaseManager</code> و <code dir="ltr">WebSQLiteDatabaseManager</code>).</li>
+</ol>
+<h3 id="33-كيف-تتعايش-النسخة-المكتبية-ونسخة-الويب-معاً؟">3.3 كيف تتعايش النسخة المكتبية ونسخة الويب معاً؟</h3>
+<pre dir="ltr"><code>+-----------------------------------+      +----------------------------------------+
+|   Desktop UI (Tkinter / main.py)  |      |   Web UI (Streamlit / web_app/app.py)  |
++-----------------+-----------------+      +-------------------+--------------------+
+                  |                                            |
+                  |                                            v
+                  |                        +----------------------------------------+
+                  |                        | Web Layer: i18n, WebSessionController, |
+                  |                        |            WebAnalyticsService         |
+                  |                        +-------------------+--------------------+
+                  |                                            |
+                  +--------------------+-----------------------+
+                                       |
+                                       v
+                  +--------------------------------------------+
+                  |   Shared Business Services (pharmacy/)     |
+                  | Supplier | Inventory | Sales | Report      |
+                  +--------------------+-----------------------+
+                                       |
+               +-----------------------+-----------------------+
+               |                                               |
+               v                                               v
++------------------------------+             +----------------------------------+
+| Desktop DatabaseManager      |             | WebSQLiteDatabaseManager         |
+| check_same_thread=True       |             | check_same_thread=False + RLock  |
+| -&gt; data/pharmacy.db          |             | -&gt; data/pharmacy_web.db          |
++------------------------------+             +----------------------------------+</code></pre>
+<p><strong>لماذا أنشأنا محولاً خاصاً للويب (<code dir="ltr">WebSQLiteDatabaseManager</code>) بدلاً من تعديل <code dir="ltr">DatabaseManager</code> الأصلي؟</strong></p>
+<ol>
+<li>النسخة المكتبية تستخدم <code dir="ltr">check_same_thread=True</code> لأن Tkinter يعمل في خيط رئيسي واحد.</li>
+<li>أما Streamlit فيشغل إعادة التنفيذ (<code dir="ltr">Rerun</code>) عبر عدة خيوط عمل (Worker Threads). استخدام اتصال SQLite مقيد بخيط واحد يسبب خطأ <code dir="ltr">sqlite3.ProgrammingError</code>.</li>
+<li>لذلك ورث <code dir="ltr">WebSQLiteDatabaseManager</code> نفس مخطط الجداول ونفس منطق <code dir="ltr">SAVEPOINT</code> من <code dir="ltr">DatabaseManager</code> دون تعديل الملف الأصلي، مع إضافة <code dir="ltr">check_same_thread=False</code> وقفل <code dir="ltr">threading.RLock()</code> وعزل مسار التخزين في <code dir="ltr">data/pharmacy_web.db</code>.</li>
+</ol>
+<hr />
+<h2 class="chapter-heading" id="الفصل-الرابع-تصميم-قاعدة-البيانات">الفصل الرابع — تصميم قاعدة البيانات</h2>
+<p>تتكون قاعدة البيانات من <strong>5 جداول فعلية</strong> ومجموعة فهارس (<code dir="ltr">Indexes</code>) مع تفعيل المفتاح الأجنبي إلزامياً عبر <code dir="ltr">PRAGMA foreign_keys = ON;</code>.</p>
+<h3 id="41-الجداول-الفعلية-وأعمدتها">4.1 الجداول الفعلية وأعمدتها</h3>
+<h4 id="1-جدول-الموردين-suppliers">1. جدول الموردين (<code dir="ltr">suppliers</code>)</h4>
+<table>
+<tr><th>العمود</th><th>النوع والقيود</th><th>الوصف</th></tr>
+<tr><td><code dir="ltr">id</code></td><td><code dir="ltr">INTEGER PRIMARY KEY AUTOINCREMENT</code></td><td>المعرف الفريد للمورد</td></tr>
+<tr><td><code dir="ltr">name</code></td><td><code dir="ltr">TEXT NOT NULL UNIQUE</code></td><td>اسم المورد (لا يتكرر)</td></tr>
+<tr><td><code dir="ltr">contact_person</code></td><td><code dir="ltr">TEXT NOT NULL DEFAULT &#x27;&#x27;</code></td><td>اسم الشخص المسؤول</td></tr>
+<tr><td><code dir="ltr">phone</code></td><td><code dir="ltr">TEXT NOT NULL DEFAULT &#x27;&#x27;</code></td><td>رقم الهاتف</td></tr>
+<tr><td><code dir="ltr">email</code></td><td><code dir="ltr">TEXT NOT NULL DEFAULT &#x27;&#x27;</code></td><td>البريد الإلكتروني</td></tr>
+<tr><td><code dir="ltr">address</code></td><td><code dir="ltr">TEXT NOT NULL DEFAULT &#x27;&#x27;</code></td><td>العنوان</td></tr>
+<tr><td><code dir="ltr">created_at</code></td><td><code dir="ltr">TEXT NOT NULL</code></td><td>وقت الإنشاء</td></tr>
+</table>
+<h4 id="2-جدول-الأدوية-medicines">2. جدول الأدوية (<code dir="ltr">medicines</code>)</h4>
+<table>
+<tr><th>العمود</th><th>النوع والقيود</th><th>الوصف</th></tr>
+<tr><td><code dir="ltr">id</code></td><td><code dir="ltr">INTEGER PRIMARY KEY AUTOINCREMENT</code></td><td>المعرف الفريد للتشغيلة الدوائية</td></tr>
+<tr><td><code dir="ltr">name</code></td><td><code dir="ltr">TEXT NOT NULL</code></td><td>الاسم التجاري للدواء</td></tr>
+<tr><td><code dir="ltr">generic_name</code></td><td><code dir="ltr">TEXT NOT NULL DEFAULT &#x27;&#x27;</code></td><td>الاسم العلمي للمادة الفعالة</td></tr>
+<tr><td><code dir="ltr">category</code></td><td><code dir="ltr">TEXT NOT NULL DEFAULT &#x27;General&#x27;</code></td><td>التصنيف الدوائي</td></tr>
+<tr><td><code dir="ltr">batch_number</code></td><td><code dir="ltr">TEXT NOT NULL UNIQUE</code></td><td>رقم التشغيلة الفريد</td></tr>
+<tr><td><code dir="ltr">supplier_id</code></td><td><code dir="ltr">INTEGER REFERENCES suppliers(id) ON DELETE RESTRICT</code></td><td>مفتاح أجنبي يربط الدواء بالمورد ويمنع حذف مورد مرتبط بأدوية</td></tr>
+<tr><td><code dir="ltr">cost_price</code></td><td><code dir="ltr">REAL NOT NULL CHECK (cost_price &gt;= 0)</code></td><td>سعر التكلفة (لا يقبل السالب)</td></tr>
+<tr><td><code dir="ltr">unit_price</code></td><td><code dir="ltr">REAL NOT NULL CHECK (unit_price &gt; 0)</code></td><td>سعر البيع (أكبر من صفر)</td></tr>
+<tr><td><code dir="ltr">quantity</code></td><td><code dir="ltr">INTEGER NOT NULL CHECK (quantity &gt;= 0)</code></td><td>الرصيد الحالي بالمخزون</td></tr>
+<tr><td><code dir="ltr">reorder_level</code></td><td><code dir="ltr">INTEGER NOT NULL DEFAULT 10 CHECK (reorder_level &gt;= 0)</code></td><td>حد التنبيه لانخفاض المخزون</td></tr>
+<tr><td><code dir="ltr">expiry_date</code></td><td><code dir="ltr">TEXT NOT NULL</code></td><td>تاريخ الصلاحية بصيغة <code dir="ltr">YYYY-MM-DD</code></td></tr>
+<tr><td><code dir="ltr">description</code></td><td><code dir="ltr">TEXT NOT NULL DEFAULT &#x27;&#x27;</code></td><td>ملاحظات إضافية</td></tr>
+<tr><td><code dir="ltr">created_at</code>, <code dir="ltr">updated_at</code></td><td><code dir="ltr">TEXT NOT NULL</code></td><td>طوابع زمنية للإنشاء والتحديث</td></tr>
+</table>
+<h4 id="3-جدول-المبيعات-sales">3. جدول المبيعات (<code dir="ltr">sales</code>)</h4>
+<table>
+<tr><th>العمود</th><th>النوع والقيود</th><th>الوصف</th></tr>
+<tr><td><code dir="ltr">id</code></td><td><code dir="ltr">INTEGER PRIMARY KEY AUTOINCREMENT</code></td><td>معرف الفاتورة</td></tr>
+<tr><td><code dir="ltr">invoice_number</code></td><td><code dir="ltr">TEXT NOT NULL UNIQUE</code></td><td>رقم الفاتورة مثل <code dir="ltr">INV-20261127-0001</code></td></tr>
+<tr><td><code dir="ltr">customer_name</code>, <code dir="ltr">customer_phone</code></td><td><code dir="ltr">TEXT</code></td><td>اسم وهاتف العميل</td></tr>
+<tr><td><code dir="ltr">subtotal</code></td><td><code dir="ltr">REAL NOT NULL CHECK (subtotal &gt;= 0)</code></td><td>المجموع الفرعي قبل الخصم والضريبة</td></tr>
+<tr><td><code dir="ltr">discount_percent</code>, <code dir="ltr">discount_amount</code></td><td><code dir="ltr">REAL</code></td><td>نسبة وقيمة الخصم (<code dir="ltr">0..100%</code>)</td></tr>
+<tr><td><code dir="ltr">tax_percent</code>, <code dir="ltr">tax_amount</code></td><td><code dir="ltr">REAL</code></td><td>نسبة وقيمة الضريبة (<code dir="ltr">0..100%</code>)</td></tr>
+<tr><td><code dir="ltr">total_amount</code></td><td><code dir="ltr">REAL NOT NULL CHECK (total_amount &gt;= 0)</code></td><td>الإجمالي النهائي المطلوب دفعه</td></tr>
+<tr><td><code dir="ltr">amount_paid</code>, <code dir="ltr">change_due</code></td><td><code dir="ltr">REAL</code></td><td>المبلغ المدفوع والباقي للعميل</td></tr>
+<tr><td><code dir="ltr">payment_method</code></td><td><code dir="ltr">TEXT NOT NULL DEFAULT &#x27;Cash&#x27;</code></td><td>طريقة الدفع (<code dir="ltr">Cash</code>, <code dir="ltr">Card</code>, <code dir="ltr">Insurance / Digital</code>)</td></tr>
+<tr><td><code dir="ltr">sale_date</code></td><td><code dir="ltr">TEXT NOT NULL</code></td><td>تاريخ ووقت الفاتورة</td></tr>
+<tr><td><code dir="ltr">notes</code></td><td><code dir="ltr">TEXT NOT NULL DEFAULT &#x27;&#x27;</code></td><td>ملاحظات الفاتورة</td></tr>
+</table>
+<h4 id="4-جدول-بنود-الفاتورة-sale_items">4. جدول بنود الفاتورة (<code dir="ltr">sale_items</code>)</h4>
+<table>
+<tr><th>العمود</th><th>النوع والقيود</th><th>الوصف</th></tr>
+<tr><td><code dir="ltr">id</code></td><td><code dir="ltr">INTEGER PRIMARY KEY AUTOINCREMENT</code></td><td>معرف السطر</td></tr>
+<tr><td><code dir="ltr">sale_id</code></td><td><code dir="ltr">INTEGER NOT NULL REFERENCES sales(id) ON DELETE CASCADE</code></td><td>ربط بالفاتورة الأم</td></tr>
+<tr><td><code dir="ltr">medicine_id</code></td><td><code dir="ltr">INTEGER NOT NULL REFERENCES medicines(id) ON DELETE RESTRICT</code></td><td>ربط بالدواء ويمنع حذف دواء تم بيعه سابقاً</td></tr>
+<tr><td><code dir="ltr">medicine_name</code>, <code dir="ltr">batch_number</code></td><td><code dir="ltr">TEXT NOT NULL</code></td><td>لقطة (Snapshot) تحفظ الاسم والتشغيلة وقت البيع</td></tr>
+<tr><td><code dir="ltr">quantity</code></td><td><code dir="ltr">INTEGER NOT NULL CHECK (quantity &gt; 0)</code></td><td>الكمية المباعة</td></tr>
+<tr><td><code dir="ltr">unit_price</code>, <code dir="ltr">line_total</code></td><td><code dir="ltr">REAL</code></td><td>سعر الوحدة وإجمالي السطر وقت البيع</td></tr>
+</table>
+<h4 id="5-جدول-تدقيق-حركات-المخزون-stock_adjustments">5. جدول تدقيق حركات المخزون (<code dir="ltr">stock_adjustments</code>)</h4>
+<table>
+<tr><th>العمود</th><th>النوع والقيود</th><th>الوصف</th></tr>
+<tr><td><code dir="ltr">id</code></td><td><code dir="ltr">INTEGER PRIMARY KEY AUTOINCREMENT</code></td><td>معرف حركة التدقيق</td></tr>
+<tr><td><code dir="ltr">medicine_id</code></td><td><code dir="ltr">INTEGER NOT NULL REFERENCES medicines(id) ON DELETE CASCADE</code></td><td>الدواء المعدّل</td></tr>
+<tr><td><code dir="ltr">change_qty</code></td><td><code dir="ltr">INTEGER NOT NULL</code></td><td>مقدار التغيير (موجب للتوريد، سالب للبيع أو الشطب)</td></tr>
+<tr><td><code dir="ltr">reason</code></td><td><code dir="ltr">TEXT NOT NULL</code></td><td>سبب الحركة (<code dir="ltr">Initial Stock</code>, <code dir="ltr">Restock</code>, <code dir="ltr">Sale</code>, <code dir="ltr">Expired Write-Off</code>, ...)</td></tr>
+<tr><td><code dir="ltr">reference_note</code></td><td><code dir="ltr">TEXT NOT NULL DEFAULT &#x27;&#x27;</code></td><td>رقم الفاتورة أو أمر الشراء</td></tr>
+<tr><td><code dir="ltr">created_at</code></td><td><code dir="ltr">TEXT NOT NULL</code></td><td>وقت تسجيل الحركة</td></tr>
+</table>
+<h3 id="42-مخطط-العلاقات-er-diagram">4.2 مخطط العلاقات (ER Diagram)</h3>
+<pre dir="ltr"><code>+-------------------+          1 : N          +-------------------------+
+|     suppliers     |------------------------&gt;|        medicines        |
+|-------------------|  (ON DELETE RESTRICT)   |-------------------------|
+| PK id             |                         | PK id                   |
+|    name (UNIQUE)  |                         | FK supplier_id          |
++-------------------+                         |    batch_number(UNIQUE) |
+                                              |    cost_price,unit_price|
+                                              |    quantity, expiry_date|
+                                              +------------+------------+
+                                                           |
+                     +-------------------------------------+
+                     | 1 : N (ON DELETE CASCADE)           | 1 : N (ON DELETE RESTRICT)
+                     v                                     v
+       +---------------------------+         +---------------------------+
+       |     stock_adjustments     |         |        sale_items         |
+       |---------------------------|         |---------------------------|
+       | PK id                     |         | PK id                     |
+       | FK medicine_id            |         | FK sale_id                |
+       |    change_qty, reason     |         | FK medicine_id            |
+       +---------------------------+         |    quantity, line_total   |
+                                             +-------------+-------------+
+                                                           ^
+                                                           | N : 1 (ON DELETE CASCADE)
+                                             +-------------+-------------+
+                                             |           sales           |
+                                             |---------------------------|
+                                             | PK id                     |
+                                             |    invoice_number(UNIQUE) |
+                                             |    total_amount, sale_date|
+                                             +---------------------------+</code></pre>
+<h3 id="43-المعاملات-transactions-والبيانات-الأولية-seed-data">4.3 المعاملات (Transactions) والبيانات الأولية (Seed Data)</h3>
+<ul>
+<li>تم ضبط <code dir="ltr">isolation_level=None</code> لكي يتحكم التطبيق يدوياً بالمعاملة عبر <code dir="ltr">BEGIN IMMEDIATE</code> و <code dir="ltr">COMMIT</code> و <code dir="ltr">ROLLBACK</code> (أو <code dir="ltr">SAVEPOINT</code> عند تداخل المعاملات).</li>
+<li>عند أول تشغيل، تتحقق الدالة <code dir="ltr">seed_sample_data()</code> عبر <code dir="ltr">is_empty()</code> من أن جدولَي الموردين والأدوية فارغان؛ فإذا وُجدت بيانات بالفعل لا تُكرَّر البيانات أبداً عبر إعادة تشغيل Streamlit.</li>
+</ul>
+<hr />
+<h2 class="chapter-heading" id="الفصل-الخامس-مفاهيم-برمجة-بايثون-المستخدمة">الفصل الخامس — مفاهيم برمجة بايثون المستخدمة</h2>
+<ol>
+<li><strong>المتغيرات وأنواع البيانات (<code dir="ltr">Variables &amp; Data Types</code>):</strong> استخدام <code dir="ltr">int</code> للكميات، <code dir="ltr">float</code> للأسعار والنسب، <code dir="ltr">str</code> للتواريخ والأسماء، و<code dir="ltr">dict</code>/<code dir="ltr">list</code> لتخزين السلة والسجلات.</li>
+<li><strong>الدوال والمعاملات (<code dir="ltr">Functions &amp; Parameters</code>):</strong> مثل <code dir="ltr">format_currency(amount: float) -&gt; str</code> و<code dir="ltr">is_expired(expiry_iso: str, reference_date: date | None = None) -&gt; bool</code> في <code dir="ltr">pharmacy/utils.py</code>.</li>
+<li><strong>الفئات والكائنات (<code dir="ltr">Classes &amp; Objects</code>) و <code dir="ltr">@dataclass</code>:</strong> في <code dir="ltr">pharmacy/models/entities.py</code> نمذجة الكيانات مثل <code dir="ltr">Medicine</code> و<code dir="ltr">CartItem</code> مع خاصية <code dir="ltr">@property def line_total(self) -&gt; float</code>.</li>
+<li><strong>الدالة البانية (<code dir="ltr">__init__</code>) والتغليف (<code dir="ltr">Encapsulation</code>):</strong> في <code dir="ltr">DatabaseManager.__init__</code> يتم فتح الاتصال وإخفاء المتغير <code dir="ltr">self._conn</code> كخاصية داخلية محمية.</li>
+<li><strong>الوراثة (<code dir="ltr">Inheritance</code>):</strong> الفئة <code dir="ltr">WebSQLiteDatabaseManager(DatabaseManager)</code> ترث تعريف الجداول ودالة التأسيس من الأب وتعيد تعريف <code dir="ltr">__init__</code> و<code dir="ltr">transaction</code> لتناسب الويب.</li>
+<li><strong>الاستيراد والوحدات (<code dir="ltr">Imports &amp; Modules</code>):</strong> تقسيم المشروع لحزم نظيفة (<code dir="ltr">pharmacy</code>, <code dir="ltr">web_app</code>, <code dir="ltr">tests</code>) مع ربط جذر المشروع في <code dir="ltr">sys.path</code> داخل <code dir="ltr">web_app/app.py</code>.</li>
+<li><strong>معالجة الاستثناءات (<code dir="ltr">Exception Handling</code>):</strong> تعريف استثناءات مخصصة <code dir="ltr">ValidationError</code> و<code dir="ltr">BusinessRuleError</code> والتقاطها لإظهار رسائل واضحة للمستخدم دون انهيار التطبيق.</li>
+<li><strong>مدير السياق (<code dir="ltr">Context Managers</code>):</strong> استخدام <code dir="ltr">@contextmanager def transaction(self)</code> لضمان تنفيذ <code dir="ltr">COMMIT</code> عند النجاح أو <code dir="ltr">ROLLBACK</code> تلقائياً عند أي خطأ.</li>
+<li><strong>سلامة الخيوط (<code dir="ltr">Thread Safety</code>):</strong> استخدام <code dir="ltr">threading.RLock()</code> في <code dir="ltr">WebSQLiteDatabaseManager</code> لمنع تضارب الكتابة المتزامنة في Streamlit.</li>
+<li><strong>البروتوكولات وتلميحات الأنواع (<code dir="ltr">Protocols &amp; Type Hints</code>):</strong> تعريف <code dir="ltr">class DatabaseBackend(Protocol)</code> في <code dir="ltr">web_app/core/db_adapter.py</code> لتسهيل تبديل SQLite بقاعدة بيانات سحابية مستقبلاً.</li>
+</ol>
+<hr />
+<h2 class="chapter-heading" id="الفصل-السادس-شرح-وحدات-التطبيق">الفصل السادس — شرح وحدات التطبيق</h2>
+<table>
+<tr><th>الوحدة / الصفحة</th><th>الغرض</th><th>ملف الواجهة (Web)</th><th>ملف الخدمة المستخدم</th><th>العمليات الرئيسية وقواعد التحقق</th></tr>
+<tr><td><strong>لوحة التحكم (Dashboard)</strong></td><td>ملخص فوري للأداء</td><td><code dir="ltr">web_app/pages_ui/dashboard_page.py</code></td><td><code dir="ltr">ReportService</code>, <code dir="ltr">WebAnalyticsService</code></td><td>عرض إجمالي الأدوية، النواقص، المنتهية، مبيعات اليوم، وصافي الربح.</td></tr>
+<tr><td><strong>إدارة الأدوية (Medicines)</strong></td><td>كتالوج الأصناف CRUD</td><td><code dir="ltr">web_app/pages_ui/medicines_page.py</code></td><td><code dir="ltr">InventoryService</code>, <code dir="ltr">WebAnalyticsService</code></td><td>إضافة/تعديل/حذف، بحث، تصفية بالتصنيف والحالة، منع تكرار رقم التشغيلة، ومنع حذف دواء له مبيعات.</td></tr>
+<tr><td><strong>نقطة البيع (POS)</strong></td><td>إصدار الفواتير والبيع</td><td><code dir="ltr">web_app/pages_ui/pos_page.py</code></td><td><code dir="ltr">SalesService</code>, <code dir="ltr">WebSessionController</code>, <code dir="ltr">WebAnalyticsService</code></td><td>سلة مشتريات، حساب الخصم والضريبة والربح، حظر الأدوية المنتهية، منع تجاوز الرصيد، ومعاملة ذرية تمنع التكرار.</td></tr>
+<tr><td><strong>إدارة المخزون (Inventory)</strong></td><td>مراقبة وتعديل الأرصدة</td><td><code dir="ltr">web_app/pages_ui/inventory_page.py</code></td><td><code dir="ltr">InventoryService</code></td><td>تعديل الرصيد (+/-) مع إلزام ذكر السبب، منع الهبوط تحت الصفر، عرض سجل التدقيق، وتصدير CSV.</td></tr>
+<tr><td><strong>الموردون (Suppliers)</strong></td><td>إدارة الموردين CRUD</td><td><code dir="ltr">web_app/pages_ui/suppliers_page.py</code></td><td><code dir="ltr">SupplierService</code></td><td>إضافة/تعديل/حذف، التحقق من صحة البريد، ومنع حذف مورد مرتبط بأدوية (<code dir="ltr">BusinessRuleError</code>).</td></tr>
+<tr><td><strong>تنبيهات الصلاحية (Alerts)</strong></td><td>الحجر الدوائي والتنبيه</td><td><code dir="ltr">web_app/pages_ui/alerts_page.py</code></td><td><code dir="ltr">InventoryService</code></td><td>نافذة تحذير قابلة للتغيير (15/30/60/90 يوم)، شطب الكمية المنتهية إلى 0، وتوريد سريع للنواقص.</td></tr>
+<tr><td><strong>التقارير (Reports)</strong></td><td>التحليل المالي والرسوم</td><td><code dir="ltr">web_app/pages_ui/reports_page.py</code></td><td><code dir="ltr">ReportService</code>, <code dir="ltr">WebAnalyticsService</code></td><td>تقارير زمنية، مخططات Matplotlib داكنة، أكثر الأدوية مبيعاً، تقييم المخزون، وتصدير CSV.</td></tr>
+</table>
+<hr />
+<h2 class="chapter-heading" id="الفصل-السابع-جولة-تفصيلية-في-أهم-دوال-الكود">الفصل السابع — جولة تفصيلية في أهم دوال الكود</h2>
+<h3 id="71-الاتصال-بقاعدة-البيانات-والمعاملة-الذرية-pharmacydatabasedb_managerpy">7.1 الاتصال بقاعدة البيانات والمعاملة الذرية (<code dir="ltr">pharmacy/database/db_manager.py</code>)</h3>
+<pre dir="ltr"><code>@contextmanager
+def transaction(self) -&gt; Iterator[sqlite3.Connection]:
+    conn = self.connection
+    is_outer = self._tx_depth == 0
+    savepoint_name = f&quot;sp_{self._tx_depth}&quot;
+
+    if is_outer:
+        conn.execute(&quot;BEGIN IMMEDIATE;&quot;)
+    else:
+        conn.execute(f&quot;SAVEPOINT {savepoint_name};&quot;)
+
+    self._tx_depth += 1
+    try:
+        yield conn
+    except Exception:
+        if is_outer:
+            if conn.in_transaction:
+                conn.execute(&quot;ROLLBACK;&quot;)
+        else:
+            conn.execute(f&quot;ROLLBACK TO SAVEPOINT {savepoint_name};&quot;)
+            conn.execute(f&quot;RELEASE SAVEPOINT {savepoint_name};&quot;)
+        raise
+    else:
+        if is_outer:
+            if conn.in_transaction:
+                conn.execute(&quot;COMMIT;&quot;)
+        else:
+            conn.execute(f&quot;RELEASE SAVEPOINT {savepoint_name};&quot;)
+    finally:
+        self._tx_depth -= 1</code></pre>
+<p><strong>الشرح للمبتدئين:</strong></p>
+<ul>
+<li>عند بدء العملية (<code dir="ltr">is_outer = True</code>) يفتح الكود معاملة حصرية <code dir="ltr">BEGIN IMMEDIATE</code> تمنع أي كتابة متضاربة.</li>
+<li>إذا استُدعيت معاملة داخل معاملة أخرى (<code dir="ltr">_tx_depth &gt; 0</code>) يُنشئ نقطة حفظ <code dir="ltr">SAVEPOINT</code>.</li>
+<li>داخل <code dir="ltr">try</code> يتم تمرير الاتصال <code dir="ltr">yield conn</code> لتنفيذ عمليات SQL.</li>
+<li>إذا حدث أي استثناء في منتصف العمل، ينتقل التنفيذ إلى <code dir="ltr">except</code> فيتم التراجع الكامل (<code dir="ltr">ROLLBACK</code>) ولا يُحفظ أي تعديل جزئي! أما عند النجاح فينفذ <code dir="ltr">COMMIT</code>.</li>
+</ul>
+<h3 id="72-حظر-الأدوية-المنتهية-الصلاحية-pharmacyutilspy">7.2 حظر الأدوية المنتهية الصلاحية (<code dir="ltr">pharmacy/utils.py</code>)</h3>
+<pre dir="ltr"><code>def is_expired(expiry_iso: str, reference_date: date | None = None) -&gt; bool:
+    ref = reference_date or today_date()
+    exp = parse_iso_date(expiry_iso, &quot;Expiry date&quot;)
+    return exp &lt;= ref</code></pre>
+<p><strong>الشرح:</strong> تحوّل الدالة نص التاريخ (<code dir="ltr">YYYY-MM-DD</code>) إلى كائن <code dir="ltr">date</code> وتقارنه بتاريخ اليوم. تطبيقاً لسياسة السلامة الدوائية، إذا كان تاريخ الانتهاء اليوم أو قبله (<code dir="ltr">&lt;=</code>) يُعتبر منتهي الصلاحية ويُمنع بيعه.</p>
+<h3 id="73-التحقق-قبل-الإضافة-للسلة-وإتمام-البيع-الذري-pharmacyservicessales_servicepy">7.3 التحقق قبل الإضافة للسلة وإتمام البيع الذري (<code dir="ltr">pharmacy/services/sales_service.py</code>)</h3>
+<ol>
+<li>تتحقق <code dir="ltr">validate_medicine_for_cart(medicine_id, requested_qty)</code> من وجود الدواء، وعدم انتهاء صلاحيته عبر <code dir="ltr">is_expired</code>, وتوفر الكمية المطلوبة.</li>
+<li>عند الدفع داخل <code dir="ltr">create_sale(...)</code>:</li>
+</ol>
+<ul>
+<li>يُفتح سياق <code dir="ltr">with self.db.transaction() as conn:</code>.</li>
+<li>يُعاد فحص كل صنف من قاعدة البيانات مباشرة (وليس من الذاكرة المؤقتة) للتحقق من الصلاحية والكمية والسعر الحقيقي <code dir="ltr">row[&quot;unit_price&quot;]</code>.</li>
+<li>تحسب <code dir="ltr">calculate_totals(...)</code> المجموع الفرعي، ثم الخصم <code dir="ltr">round(subtotal * (disc_pct / 100.0), 2)</code>، ثم الضريبة على المبلغ بعد الخصم، ثم الإجمالي النهائي والباقي.</li>
+<li>تُسجّل الفاتورة في <code dir="ltr">sales</code>، والبنود في <code dir="ltr">sale_items</code>، ويُخصم الرصيد من <code dir="ltr">medicines</code>، وتُوثّق الحركة في <code dir="ltr">stock_adjustments</code>.</li>
+<li>فشل أي سطر واحد (مثلاً نفاد صنف رقم 2 في السلة) يلغي الفاتورة ويلغي خصم الصنف رقم 1 بالكامل.</li>
+</ul>
+<h3 id="74-حساب-صافي-الربح-web_appcoreweb_servicespy">7.4 حساب صافي الربح (<code dir="ltr">web_app/core/web_services.py</code>)</h3>
+<p>في <code dir="ltr">WebAnalyticsService.get_profit_summary(...)</code> و<code dir="ltr">calculate_cart_profit(...)</code>:</p>
+<ul>
+<li>إيراد البنود = مجموع <code dir="ltr">(سعر البيع × الكمية)</code>.</li>
+<li>تكلفة البضاعة المباعة (COGS) = مجموع <code dir="ltr">(cost_price × الكمية)</code>.</li>
+<li><strong>إجمالي الربح (Gross Profit)</strong> = إيراد البنود − التكلفة.</li>
+<li><strong>صافي الربح (Net Profit)</strong> = إجمالي الربح − قيمة الخصم الممنوح على الفاتورة.</li>
+</ul>
+<h3 id="75-منع-تكرار-الفواتير-عند-إعادة-التشغيل-websessioncontrollercomplete_sale_idempotent">7.5 منع تكرار الفواتير عند إعادة التشغيل (<code dir="ltr">WebSessionController.complete_sale_idempotent</code>)</h3>
+<p>في Streamlit، كل ضغطة زر أو تغيير واجهة يعيد تشغيل السكربت من الأعلى للأسفل (<code dir="ltr">Rerun</code>).</p>
+<ul>
+<li>يحتفظ التطبيق برمز معاملة فريد <code dir="ltr">rxcare_pos_tx_token</code> في <code dir="ltr">st.session_state</code>.</li>
+<li>عند نجاح إتمام البيع، يُخزن الرمز داخل <code dir="ltr">rxcare_processed_tx_tokens</code> مع رقم الفاتورة، وتُفرغ السلة ويُولّد رمز جديد فوراً.</li>
+<li>إذا أُعيد إرسال نفس الرمز بالخطأ أثناء Rerun، يُرجع الكود الفاتورة المسجلة دون إنشاء فاتورة مكررة أو خصم المخزون مرتين!</li>
+</ul>
+<hr />
+<h2 class="chapter-heading" id="الفصل-الثامن-آلية-تشغيل-التطبيق-والنشر">الفصل الثامن — آلية تشغيل التطبيق والنشر</h2>
+<ol>
+<li><strong>التشغيل في بايثون:</strong> عند تنفيذ <code dir="ltr">streamlit run web_app/app.py</code>:</li>
+</ol>
+<ul>
+<li>يضيف <code dir="ltr">web_app/app.py</code> جذر المشروع إلى <code dir="ltr">sys.path</code> لضمان عمل استيراد <code dir="ltr">pharmacy.<em></code> و<code dir="ltr">web_app.</em></code>.</li>
+<li>يستدعي <code dir="ltr">get_web_app_container()</code> المزيّن بـ <code dir="ltr">@st.cache_resource</code> لإنشاء اتصال SQLite واحد مشترك لكل خادم وبذر البيانات مرة واحدة فقط إذا كانت الجداول فارغة.</li>
+</ul>
+<ol>
+<li><strong>التفاعل وإعادة التنفيذ (Rerun) وحالة الجلسة (<code dir="ltr">Session State</code>):</strong></li>
+</ol>
+<ul>
+<li>في كل نقرة للمستخدم يعيد Streamlit تنفيذ <code dir="ltr">main()</code>؛ هنا تحافظ <code dir="ltr">st.session_state</code> على اللغة المختارة (<code dir="ltr">rxcare_lang</code>)، الصفحة الحالية (<code dir="ltr">rxcare_page_key</code>)، سلة المشتريات (<code dir="ltr">rxcare_pos_cart</code>)، ورمز المعاملة (<code dir="ltr">rxcare_pos_tx_token</code>).</li>
+</ul>
+<ol>
+<li><strong>النشر عبر GitHub و Streamlit Community Cloud:</strong></li>
+</ol>
+<ul>
+<li>يقرأ Streamlit Community Cloud الإعدادات من <code dir="ltr">.streamlit/config.toml</code> في جذر المستودع، ويثبّت الاعتماديات من <code dir="ltr">web_app/requirements.txt</code> (<code dir="ltr">streamlit&gt;=1.38.0</code>, <code dir="ltr">matplotlib&gt;=3.8.0</code>)، ويشغّل <code dir="ltr">web_app/app.py</code>.</li>
+</ul>
+<hr />
+<h2 class="chapter-heading" id="الفصل-التاسع-الاختبارات-ومعالجة-الأخطاء">الفصل التاسع — الاختبارات ومعالجة الأخطاء</h2>
+<h3 id="91-الاختبارات-المنفذة-فعلياً">9.1 الاختبارات المنفذة فعلياً</h3>
+<p>يحتوي المجلد <code dir="ltr">tests/</code> على ملفين للاختبار الآلي باستخدام <code dir="ltr">unittest</code>:</p>
+<ol>
+<li><strong><code dir="ltr">tests/test_pharmacy_system.py</code> (6 اختبارات للنظام الأساسي والنسخة المكتبية):</strong></li>
+</ol>
+<ul>
+<li><code dir="ltr">test_schema_foreign_keys_and_seed_idempotency</code>: فحص تفعيل <code dir="ltr">PRAGMA foreign_keys</code> وعدم تكرار بيانات البذر.</li>
+<li><code dir="ltr">test_supplier_crud_and_delete_protection</code>: إنشاء/تحديث الموردين ومنع حذف مورد مرتبط بدواء.</li>
+<li><code dir="ltr">test_medicine_crud_filtering_and_adjustments</code>: إضافة/تعديل الأدوية، التصفية، التوريد، الشطب المنتهي، ومنع الرصيد السالب.</li>
+<li><code dir="ltr">test_sales_calculations_and_inventory_decrement</code>: دقة حساب الخصم والضريبة والباقي وخصم المخزون ومنع حذف دواء مباع.</li>
+<li><code dir="ltr">test_expiry_restriction_and_atomic_rollback</code>: حظر المنتهي الصلاحية (بما فيها تاريخ اليوم)، والتراجع الذري الكامل عند فشل أحد بنود السلة أو نقص المخزون أو نقص الدفع.</li>
+<li><code dir="ltr">test_dashboard_reports_and_csv_export</code>: صحة مؤشرات لوحة التحكم والتقارير وتصدير CSV.</li>
+</ul>
+<ol>
+<li><strong><code dir="ltr">tests/test_web_edition.py</code> (6 اختبارات لنسخة الويب والتوطين):</strong></li>
+</ol>
+<ul>
+<li><code dir="ltr">test_web_db_isolation_and_seed_once_across_reruns</code>: عزل قاعدة بيانات الويب وتحليل روابط <code dir="ltr">sqlite:///</code> ورفض الروابط غير المدعومة بـ <code dir="ltr">NotImplementedError</code> واختبار رسائل الفلاش.</li>
+<li><code dir="ltr">test_thread_safe_reads_and_writes</code>: تشغيل 6 خيوط متزامنة للقراءة والكتابة دون أخطاء SQLite.</li>
+<li><code dir="ltr">test_medicine_category_filter_and_crud</code>: التصفية بالتصنيف وحذف الأدوية.</li>
+<li><code dir="ltr">test_pos_session_cart_profit_expiry_and_rerun_idempotency</code>: سلة الجلسة، حساب الربح، حظر المنتهي، ومنع تكرار الفاتورة عند إعادة إرسال نفس الرمز.</li>
+<li><code dir="ltr">test_reports_daily_sales_and_profit_summary</code>: تقارير الأرباح والسلسلة اليومية للمبيعات.</li>
+<li><code dir="ltr">test_bilingual_i18n_parity_cart_preservation_and_shaping</code>: تطابق مفاتيح العربية والإنجليزية 100%، وبقاء السلة والصفحة ورمز المعاملة عند تبديل اللغة، وتشكيل الحروف العربية لـ Matplotlib.</li>
+</ul>
+<h3 id="92-ما-تم-اختباره-مقابل-ما-لم-يُختبر-هنا">9.2 ما تم اختباره مقابل ما لم يُختبر هنا</h3>
+<ul>
+<li><strong>تم تنفيذه فعلياً ونجح (12/12 اختباراً + فحص <code dir="ltr">compileall</code> و AST):</strong> جميع عمليات قاعدة البيانات، CRUD، الحسابات، التراجع الذري، تعدد الخيوط، التوطين، وتصدير CSV.</li>
+<li><strong>لم يُختبر داخل حاوية الخادم السحابية:</strong> التشغيل المباشر لنافذة <code dir="ltr">Tkinter</code> (لعدم وجود <code dir="ltr">python3-tk</code> وشاشة رسومية في الحاوية)، والتشغيل الحي لمتصفح <code dir="ltr">Streamlit</code> (لعدم تثبيت <code dir="ltr">streamlit</code>/<code dir="ltr">matplotlib</code> في الحاوية نفسها).</li>
+</ul>
+<hr />
+<h2 class="chapter-heading" id="الفصل-العاشر-الأمان-والقيود">الفصل العاشر — الأمان والقيود</h2>
+<ol>
+<li><strong>عزل قواعد البيانات:</strong> النسخة المكتبية تستخدم <code dir="ltr">data/pharmacy.db</code> ونسخة الويب تستخدم <code dir="ltr">data/pharmacy_web.db</code> لتجنب أي تداخل.</li>
+<li><strong>التحقق من المدخلات ومنع حقن SQL:</strong> جميع الاستعلامات تستخدم <strong>الاستعلامات المعلمية (Parameterized Queries)</strong> عبر علامة <code dir="ltr">?</code> (مثل <code dir="ltr">WHERE id = ?</code>) ولا تدمج مدخلات المستخدم نصياً داخل SQL.</li>
+<li><strong>إخفاء التفاصيل الحساسة:</strong> في <code dir="ltr">web_app/app.py</code> تُلتقط الاستثناءات غير المتوقعة وتُعرض رسالة ودية مترجمة دون كشف مسارات الخادم أو تتبّع الأخطاء الكامل للمستخدم النهائي.</li>
+<li><strong>حالة المصادقة والصلاحيات (Authentication &amp; RBAC):</strong> لا يحتوي النظام حالياً على تسجيل دخول أو أدوار مستخدمين (مدير/كاشير)؛ وهو مصمم كنظام تشغيلي لنقطة عمل واحدة أو عرض تعليمي.</li>
+<li><strong>قيود SQLite على الاستضافة السحابية:</strong> تخزين الملفات المحلي في Streamlit Community Cloud <strong>مؤقت (Ephemeral)</strong> وقد تُمحى البيانات عند إعادة التشغيل أو التحديث. للانتقال للإنتاج الفعلي يلزم ربط <code dir="ltr">DatabaseBackend</code> بقاعدة بيانات سحابية دائمة مثل PostgreSQL وإضافة نظام مصادقة.</li>
+</ol>
+<hr />
+<h2 class="chapter-heading" id="الفصل-الحادي-عشر-دليل-التشغيل-والصيانة">الفصل الحادي عشر — دليل التشغيل والصيانة</h2>
+<pre dir="ltr"><code># 1. تشغيل النسخة المكتبية (Tkinter)
+python3 main.py
+
+# 2. تثبيت اعتماديات نسخة الويب وتشغيلها محلياً
+pip install -r web_app/requirements.txt
+streamlit run web_app/app.py
+
+# 3. تشغيل جميع الاختبارات الآلية (المكتبية + الويب)
+python3 -m unittest discover -s tests -v
+
+# 4. تحديث مستودع GitHub وإعادة النشر التلقائي على Streamlit Cloud
+git add .
+git commit -m &quot;Update RxCare bilingual UI and documentation&quot;
+git push origin main</code></pre>
+<hr />
+<h2 class="chapter-heading" id="الفصل-الثاني-عشر-التحسينات-المستقبلية">الفصل الثاني عشر — التحسينات المستقبلية</h2>
+<table>
+<tr><th>الميزة</th><th>الحالة الحالية</th><th>مقترح التطوير المستقبلي</th></tr>
+<tr><td>قاعدة البيانات السحابية</td><td>محلي SQLite (<code dir="ltr">sqlite:///</code>)</td><td>إضافة محول PostgreSQL / Supabase عبر <code dir="ltr">RXCARE_WEB_DB_URL</code></td></tr>
+<tr><td>الأمان والمستخدمون</td><td>غير منفذ</td><td>إضافة تسجيل دخول وصلاحيات (مدير، صيدلي، كاشير)</td></tr>
+<tr><td>قارئ الباركود</td><td>غير منفذ</td><td>ربط حقل البحث في POS بقارئ Barcode لسرعة الصرف</td></tr>
+<tr><td>تنبيهات آلية</td><td>عرض داخل الواجهة</td><td>إرسال تنبيهات بريد إلكتروني أو واتساب عند قرب الانتهاء</td></tr>
+<tr><td>طباعة الفاتورة</td><td>ملخص فاتورة + CSV</td><td>دعم طابعات الإيصالات الحرارية (80mm) بصيغة PDF/Print</td></tr>
+</table>
+<hr />
+<h2 class="chapter-heading" id="الفصل-الثالث-عشر-أسئلة-المناقشة-الجامعية-45-سؤالاً-وإجابة">الفصل الثالث عشر — أسئلة المناقشة الجامعية (45 سؤالاً وإجابة)</h2>
+<h3 id="أولاً-الأسئلة-الأساسية-وفكرة-المشروع">أولاً: الأسئلة الأساسية وفكرة المشروع</h3>
+<ol>
+<li><strong>ما هي فكرة مشروع RxCare؟</strong> نظام لإدارة الصيدليات يدير الأدوية والموردين والمخزون والمبيعات وتنبيهات الصلاحية عبر نسخة مكتبية ونسخة ويب ثنائية اللغة.</li>
+<li><strong>ما المشكلة الحقيقية التي يحلها النظام؟</strong> يمنع بيع الأدوية المنتهية الصلاحية، ويتتبع النواقص والتكاليف والأرباح بدقة، ويستبدل السجلات الورقية.</li>
+<li><strong>ما الفرق بين الواجهة الأمامية (Frontend) والخلفية (Backend) في مشروعك؟</strong> الواجهة الأمامية (<code dir="ltr">pharmacy/ui</code> أو <code dir="ltr">web_app/pages_ui</code>) مسؤولة عن العرض وتفاعل المستخدم، بينما الخلفية (<code dir="ltr">pharmacy/services</code> و<code dir="ltr">database</code>) مسؤولة عن قواعد العمل والحسابات والتخزين في SQLite.</li>
+<li><strong>لماذا قمت ببناء نسختين (Desktop و Web)؟</strong> لإثبات مرونة المعمارية الطبقية؛ حيث يعمل النظام محلياً دون إنترنت عبر Tkinter، ويعمل عن بُعد عبر المتصفح والسحابة باستخدام Streamlit مع إعادة استخدام نفس طبقة الخدمات.</li>
+<li><strong>ما هي العمليات الأربع الأساسية (CRUD)؟</strong> Create (إنشاء)، Read (قراءة)، Update (تحديث)، Delete (حذف)، وقد طُبقت كاملة على الأدوية والموردين.</li>
+</ol>
+<h3 id="ثانياً-أسئلة-لغة-بايثون-والبرمجة-كائنية-التوجه-oop">ثانياً: أسئلة لغة بايثون والبرمجة كائنية التوجه (OOP)</h3>
+<ol>
+<li><strong>ما الفرق بين الفئة (Class) والكائن (Object) مع مثال من المشروع؟</strong> الفئة هي القالب مثل <code dir="ltr">class Medicine</code> أو <code dir="ltr">class SalesService</code>، والكائن هو نسخة حية منه في الذاكرة مثل <code dir="ltr">sales_service = SalesService(db)</code>.</li>
+<li><strong>ما فائدة <code dir="ltr">@dataclass</code> في <code dir="ltr">entities.py</code>؟</strong> تُنشئ تلقائياً <code dir="ltr">__init__</code> و<code dir="ltr">__repr__</code> لتمثيل الكيانات مثل <code dir="ltr">Supplier</code> و<code dir="ltr">CartItem</code> بكود نظيف ومختصر.</li>
+<li><strong>ما دور الدالة البانية <code dir="ltr">__init__</code>؟</strong> تهيئ الكائن عند إنشائه؛ مثلاً <code dir="ltr">DatabaseManager.__init__</code> يفتح الاتصال بقاعدة البيانات ويفعّل المفاتيح الأجنبية وينشئ الجداول.</li>
+<li><strong>أين استخدمت الوراثة (Inheritance) في المشروع؟</strong> <code dir="ltr">WebSQLiteDatabaseManager</code> يرث من <code dir="ltr">DatabaseManager</code> ليعيد استخدام بناء الجداول والبيانات الأولية مع إضافة أمان الخيوط للويب.</li>
+<li><strong>ما هو التغليف (Encapsulation) وكيف طُبق؟</strong> إخفاء التفاصيل الداخلية مثل <code dir="ltr">self._conn</code> و<code dir="ltr">self._lock</code> داخل <code dir="ltr">DatabaseManager</code> والسماح بالتعامل معها عبر واجهات منظمة مثل <code dir="ltr">transaction()</code>.</li>
+<li><strong>ما هو Context Manager (<code dir="ltr">with</code>) وأين استخدمته؟</strong> آلية تضمن فتح المورد وإغلاقه تلقائياً؛ استخدمنا <code dir="ltr">@contextmanager def transaction()</code> لضمان <code dir="ltr">COMMIT</code> أو <code dir="ltr">ROLLBACK</code> تلقائياً.</li>
+<li><strong>ما الفرق بين <code dir="ltr">ValidationError</code> و <code dir="ltr">BusinessRuleError</code>؟</strong> الأول لأخطاء صيغة المدخلات (مثل تاريخ خاطئ أو حقل فارغ)، والثاني لانتهاك قواعد الصيدلة (مثل بيع دواء منتهي أو حذف مورد مرتبط بأدوية).</li>
+<li><strong>ما فائدة <code dir="ltr">Protocol</code> في <code dir="ltr">db_adapter.py</code>؟</strong> يحدد عقداً برمجياً (<code dir="ltr">DatabaseBackend</code>) يصف الدوال المطلوبة من أي قاعدة بيانات دون ربط الكود بنوع قاعدة بيانات واحد.</li>
+<li><strong>كيف تعاملت مع معالجة الأخطاء (<code dir="ltr">try / except</code>)؟</strong> نلتقط الأخطاء في طبقة الواجهة ونترجمها للمستخدم عبر <code dir="ltr">localize_error()</code> مع منع انهيار البرنامج.</li>
+<li><strong>لماذا استخدمنا Type Hints (<code dir="ltr">-&gt; float</code>, <code dir="ltr">list[Medicine]</code>)؟</strong> لزيادة وضوح الكود وتسهيل اكتشاف الأخطاء قبل التشغيل.</li>
+</ol>
+<h3 id="ثالثاً-أسئلة-قواعد-البيانات-و-sql">ثالثاً: أسئلة قواعد البيانات و SQL</h3>
+<ol>
+<li><strong>لماذا اخترت SQLite بدلاً من MySQL أو PostgreSQL؟</strong> لأنه قاعدة بيانات مدمجة بلا خادم خارجي، مثالية للتطبيقات المكتبية والنماذج السحابية السريعة وتدعم معاملات ACID.</li>
+<li><strong>ما الفرق بين المفتاح الأساسي (Primary Key) والمفتاح الأجنبي (Foreign Key)؟</strong> الأساسي يميز كل صف داخل جدوله (<code dir="ltr">medicines.id</code>)، والأجنبي يربط صفاً بجدول آخر (<code dir="ltr">medicines.supplier_id -&gt; suppliers.id</code>).</li>
+<li><strong>ما فائدة <code dir="ltr">PRAGMA foreign_keys = ON;</code> في SQLite؟</strong> افتراضياً لا تفرض SQLite قيود المفتاح الأجنبي ما لم يتم تفعيل هذا الأمر عند كل اتصال.</li>
+<li><strong>لماذا استخدمنا <code dir="ltr">ON DELETE RESTRICT</code> بين المورد والأدوية؟</strong> لمنع حذف مورد ما زالت له أدوية مسجلة في المخزون حفاظاً على سلامة البيانات.</li>
+<li><strong>لماذا حفظنا <code dir="ltr">medicine_name</code> و<code dir="ltr">batch_number</code> داخل <code dir="ltr">sale_items</code> رغم وجود <code dir="ltr">medicine_id</code>؟</strong> كـ Snapshot حتى تبقى الفواتير التاريخية دقيقة إذا تغير اسم الدواء أو سعره لاحقاً.</li>
+<li><strong>ما هي المعاملة (Database Transaction) ولماذا هي ضرورية في نقطة البيع؟</strong> مجموعة أوامر SQL تُنفذ كوحدة واحدة لا تتجزأ (ACID). في البيع، إذا فشل خصم الصنف الثاني في السلة تتراجع قاعدة البيانات عن الفاتورة وعن خصم الصنف الأول بالكامل.</li>
+<li><strong>لماذا استخدمنا <code dir="ltr">BEGIN IMMEDIATE</code> مع <code dir="ltr">isolation_level=None</code>؟</strong> للتحكم اليدوي الصريح ببداية المعاملة ونهايتها ومنع تعارض الكتابة المتزامنة.</li>
+<li><strong>كيف تمنع حقن SQL (SQL Injection)؟</strong> باستخدام المعاملات (<code dir="ltr">?</code>) في جميع استعلامات <code dir="ltr">execute(sql, params)</code> وعدم دمج نصوص المستخدم في الاستعلام.</li>
+<li><strong>ما فائدة الفهارس (<code dir="ltr">CREATE INDEX</code>) في الجداول؟</strong> لتسريع البحث والاستعلام عن أسماء الأدوية وتواريخ الصلاحية والفواتير عند كبر حجم البيانات.</li>
+<li><strong>ما وظيفة جدول <code dir="ltr">stock_adjustments</code>؟</strong> سجل تدقيق غير قابل للتجاوز يحفظ كل حركة تغيير في المخزون مع السبب والوقت والمرجع.</li>
+</ol>
+<h3 id="رابعاً-أسئلة-منطق-الصيدلية-pos-expiry-profit">رابعاً: أسئلة منطق الصيدلية (POS &amp; Expiry &amp; Profit)</h3>
+<ol>
+<li><strong>ماذا يحدث عندما يحاول الكاشير بيع دواء منتهي الصلاحية؟</strong> تمنعه دالة <code dir="ltr">validate_medicine_for_cart</code> في الواجهة، كما تمنعه <code dir="ltr">create_sale</code> داخل معاملة قاعدة البيانات وترفع <code dir="ltr">BusinessRuleError</code>.</li>
+<li><strong>هل يُسمح ببيع الدواء في يوم انتهاء صلاحيته نفسه؟</strong> لا؛ وفق دالة <code dir="ltr">is_expired</code> الشرط هو <code dir="ltr">exp &lt;= ref</code>، أي يُحظر من يوم الانتهاء فصاعداً حرصاً على سلامة المريض.</li>
+<li><strong>كيف يحسب نظام POS الإجمالي والخصم والضريبة؟</strong> الإجمالي الفرعي = مجموع (السعر × الكمية)، ثم يُخصم الخصم النقدي، ثم تُحسب الضريبة على المبلغ الخاضع بعد الخصم، ثم يُجمعان للحصول على الإجمالي النهائي.</li>
+<li><strong>كيف يحسب النظام صافي الربح (Net Profit)؟</strong> يحسب الفرق بين سعر البيع وسعر التكلفة (<code dir="ltr">unit_price - cost_price</code>) لكل وحدة مباعة، ثم يطرح قيمة الخصم الممنوح على الفاتورة.</li>
+<li><strong>كيف يدعم النظام مبدأ FEFO (First Expired, First Out)؟</strong> عبر ترتيب الاستعلامات حسب <code dir="ltr">expiry_date ASC</code> وعرض نافذة تنبيه قابلة للضبط (15/30/60/90 يوماً) في صفحة التنبيهات.</li>
+</ol>
+<h3 id="خامساً-أسئلة-streamlit-ونسخة-الويب-والتوطين">خامساً: أسئلة Streamlit ونسخة الويب والتوطين</h3>
+<ol>
+<li><strong>ماذا يحدث عند حدوث Rerun في Streamlit؟</strong> يعيد Streamlit تنفيذ ملف <code dir="ltr">web_app/app.py</code> من السطر الأول للأسفل لتحديث الواجهة بناءً على مدخلات المستخدم الجديدة.</li>
+<li><strong>كيف تحافظ على سلة المشتريات واللغة أثناء الـ Rerun؟</strong> باستخدام <code dir="ltr">st.session_state</code> عبر <code dir="ltr">WebSessionController</code> لتخزين السلة واللغة المختارة ومفتاح الصفحة المستقر.</li>
+<li><strong>كيف منعت تكرار الفواتير عند إعادة التشغيل السريع في POS؟</strong> باستخدام رمز معاملة لمرة واحدة <code dir="ltr">rxcare_pos_tx_token</code>؛ بعد إتمام البيع يُسجل الرمز في <code dir="ltr">rxcare_processed_tx_tokens</code> وتُفرغ السلة ويُستبدل الرمز.</li>
+<li><strong>لماذا احتجنا <code dir="ltr">check_same_thread=False</code> و <code dir="ltr">RLock</code> في نسخة الويب؟</strong> لأن Streamlit يشغل الجلسات عبر خيوط متعددة، و<code dir="ltr">RLock</code> يمنع تداخل معاملات SQLite بين الخيوط.</li>
+<li><strong>كيف حققت التبديل بين العربية (RTL) والإنجليزية (LTR) دون فقدان السلة؟</strong> بفصل مفاتيح الصفحات (<code dir="ltr">NAV_PAGE_KEYS</code>) عن النصوص المترجمة في <code dir="ltr">i18n.py</code> وتطبيق CSS ديناميكي لـ <code dir="ltr">direction: rtl/ltr</code>.</li>
+<li><strong>ما فائدة <code dir="ltr">@st.cache_resource</code> على <code dir="ltr">get_web_app_container()</code>؟</strong> يضمن إنشاء اتصال قاعدة بيانات واحد ومشترك لعملية الخادم بدلاً من فتح اتصال جديد مع كل Rerun.</li>
+<li><strong>كيف حللت مشكلة عرض الحروف العربية في رسوم Matplotlib؟</strong> بإنشاء وحدة <code dir="ltr">web_app/core/arabic_shape.py</code> لتشكيل الحروف العربية بصيغة Presentation Forms-B وعكس الترتيب البصري لـ RTL مع بقاء الأرقام LTR.</li>
+</ol>
+<h3 id="سادساً-أسئلة-الاختبارات-والأمان-والقيود-والنشر">سادساً: أسئلة الاختبارات والأمان والقيود والنشر</h3>
+<ol>
+<li><strong>ما الفرق بين اختبار الوحدة (Unit Test) واختبار التكامل (Integration Test)؟</strong> اختبار الوحدة يفحص دالة صغيرة منفردة (مثل حساب المجموع)، أما التكامل فيفحص تفاعل الخدمة مع قاعدة البيانات الحقيقية (مثل <code dir="ltr">create_sale</code> + خصم المخزون + سجل التدقيق).</li>
+<li><strong>ما أبرز قيود النسخة المنشورة حالياً على Streamlit Cloud؟</strong> ملف SQLite المحلي قد يُعاد ضبطه عند إعادة تشغيل الحاوية السحابية، ولا يوجد تسجيل دخول متعدد المستخدمين بعد.</li>
+<li><strong>كيف يمكنك ترقية النظام لاستخدام قاعدة بيانات سحابية دائمة مستقبلاً؟</strong> بتنفيذ فئة جديدة تطابق بروتوكول <code dir="ltr">DatabaseBackend</code> تتصل بـ PostgreSQL وربطها داخل <code dir="ltr">create_database_backend()</code> عند تمرير <code dir="ltr">RXCARE_WEB_DB_URL</code>.</li>
+<li><strong>ما الفرق بين ملف <code dir="ltr">data/pharmacy.db</code> و <code dir="ltr">data/pharmacy_web.db</code>؟</strong> الأول خاص بالنسخة المكتبية، والثاني معزول لنسخة الويب حتى لا تؤثر تجربة الويب على بيانات سطح المكتب.</li>
+<li><strong>لماذا وضعنا <code dir="ltr">.streamlit/config.toml</code> في جذر المستودع وليس داخل <code dir="ltr">web_app/</code>؟</strong> لأن Streamlit و Streamlit Community Cloud يقرآن ملف الإعدادات من جذر مجلد التشغيل فقط.</li>
+</ol>
+<hr />
+<h2 class="chapter-heading" id="الفصل-الرابع-عشر-نص-العرض-العملي-أمام-لجنة-المناقشة">الفصل الرابع عشر — نص العرض العملي أمام لجنة المناقشة</h2>
+<ol>
+<li><strong>لوحة التحكم (Dashboard) ومبدل اللغة (30 ثانية):</strong></li>
+</ol>
+<ul>
+<li><em>ما تقوله للجنة:</em> &quot;هذا نظام RxCare بواجهة داكنة حديثة ودعم كامل للعربية RTL والإنجليزية LTR. نلاحظ في لوحة التحكم المؤشرات الفورية: عدد الأدوية، النواقص، المنتهية، مبيعات اليوم، وصافي الربح. سأبدّل اللغة الآن إلى الإنجليزية ثم أعود للعربية لإظهار مرونة الواجهة.&quot;</li>
+</ul>
+<ol>
+<li><strong>إدارة الأدوية (Medicines) (45 ثانية):</strong></li>
+</ol>
+<ul>
+<li><em>ما تقوله للجنة:</em> &quot;في صفحة إدارة الأدوية نستعرض التشغيلات مع تصفية بالتصنيف والبحث الفوري، وسأضيف الآن دواءً جديداً برقم تشغيلة فريد وسعر تكلفة وسعر بيع.&quot;</li>
+</ul>
+<ol>
+<li><strong>إدارة المخزون (Inventory) (30 ثانية):</strong></li>
+</ol>
+<ul>
+<li><em>ما تقوله للجنة:</em> &quot;هنا نراقب الأرصدة وقيمتها بالتكلفة والبيع، وننفذ توريداً (+10) لزيادة رصيد الصنف مع توثيق الحركة تلقائياً في تبويب سجل التدقيق.&quot;</li>
+</ul>
+<ol>
+<li><strong>الموردون (Suppliers) (25 ثانية):</strong></li>
+</ol>
+<ul>
+<li><em>ما تقوله للجنة:</em> &quot;في صفحة الموردين نعرض الموردين وعدد الأصناف المرتبطة بكل مورد، مع حماية مرجعية تمنع حذف أي مورد مرتبط بأدوية حالية.&quot;</li>
+</ul>
+<ol>
+<li><strong>نقطة البيع (POS) وإثبات حظر المنتهي (60 ثانية):</strong></li>
+</ol>
+<ul>
+<li><em>ما تقوله للجنة:</em> &quot;في نقطة البيع نختار أولاً تشغيلة منتهية الصلاحية لنثبت أن النظام يحظر إضافتها للسلة لحماية المريض. الآن نضيف دواءً صالحاً، نطبّق خصماً وضريبة، نلاحظ حساب صافي الربح التقديري مباشرة، ثم نتمم البيع ليُخصم المخزون ذرياً وتصدر الفاتورة.&quot;</li>
+</ul>
+<ol>
+<li><strong>تنبيهات الصلاحية (Expiry Alerts) (30 ثانية):</strong></li>
+</ol>
+<ul>
+<li><em>ما تقوله للجنة:</em> &quot;في صفحة التنبيهات نتابع الأدوية المنتهية وقريبة الانتهاء وننخفضة المخزون، ويمكننا شطب التشغيلة المنتهية أو توريد النواقص بضغطة زر.&quot;</li>
+</ul>
+<ol>
+<li><strong>التقارير (Reports) (30 ثانية):</strong></li>
+</ol>
+<ul>
+<li><em>ما تقوله للجنة:</em> &quot;أخيراً في صفحة التقارير نحدد النطاق الزمني لعرض مخططات الإيرادات والأرباح اليومية، أكثر الأدوية مبيعاً، تقييم المخزون حسب التصنيف، وتصدير البيانات بصيغة CSV.&quot;</li>
+</ul>
+<hr />
+<h2 id="كيفية-تحويل-الدليل-إلى-pdf-محلياً-بجودة-طباعة-احترافية">كيفية تحويل الدليل إلى PDF محلياً بجودة طباعة احترافية</h2>
+<h3 id="الطريقة-الأولى-الأسهل-عبر-المتصفح-باستخدام-ملف-html-المرفق">الطريقة الأولى (الأسهل — عبر المتصفح باستخدام ملف HTML المرفق)</h3>
+<ol>
+<li>افتح الملف <strong><code dir="ltr">docs/RxCare_Complete_Project_Guide.html</code></strong> في متصفح <strong>Google Chrome</strong> أو <strong>Microsoft Edge</strong>.</li>
+<li>اضغط <strong><code dir="ltr">Ctrl + P</code></strong> (أو <strong><code dir="ltr">Cmd + P</code></strong> على macOS).</li>
+<li>اختر الوجهة <strong><code dir="ltr">Save as PDF</code></strong>، فعّل <strong><code dir="ltr">Background graphics</code></strong>، واحفظه باسم <strong><code dir="ltr">RxCare_Complete_Project_Guide.pdf</code></strong>.</li>
+</ol>
+<h3 id="الطريقة-الثانية-عبر-pandoc-xelatex-من-ملف-markdown">الطريقة الثانية (عبر Pandoc + XeLaTeX من ملف Markdown)</h3>
+<pre dir="ltr"><code>pandoc docs/RxCare_Complete_Project_Guide.md \
+  -o RxCare_Complete_Project_Guide.pdf \
+  --pdf-engine=xelatex \
+  -V dir=rtl \
+  -V mainfont=&quot;Cairo&quot; \
+  --toc</code></pre>
+  </div>
+</body>
+</html>

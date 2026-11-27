@@ -16,6 +16,7 @@ from pharmacy.services.sales_service import SaleCalculation, SalesService
 from pharmacy.services.supplier_service import SupplierService
 from pharmacy.utils import ValidationError, parse_iso_date, parse_non_negative_float, today_date
 from web_app.core.db_adapter import WebSQLiteDatabaseManager, create_database_backend
+from web_app.core.i18n import DEFAULT_LANG, NAV_PAGE_KEYS, SUPPORTED_LANGS
 
 
 @dataclass(frozen=True)
@@ -203,13 +204,15 @@ class WebAnalyticsService:
 
 
 class WebSessionController:
-    """Manages Streamlit-compatible session state for POS cart and rerun idempotency."""
+    """Manages Streamlit-compatible session state for language, POS cart, and rerun idempotency."""
 
     CART_KEY = "rxcare_pos_cart"
     TOKEN_KEY = "rxcare_pos_tx_token"
     PROCESSED_TOKENS_KEY = "rxcare_processed_tx_tokens"
     LAST_SALE_KEY = "rxcare_last_completed_sale"
     FLASH_SUCCESS_KEY = "rxcare_flash_success"
+    LANG_KEY = "rxcare_lang"
+    PAGE_KEY = "rxcare_page_key"
 
     @classmethod
     def ensure_initialized(cls, session_state: MutableMapping[str, Any]) -> None:
@@ -223,6 +226,34 @@ class WebSessionController:
             session_state[cls.LAST_SALE_KEY] = None
         if cls.FLASH_SUCCESS_KEY not in session_state:
             session_state[cls.FLASH_SUCCESS_KEY] = None
+        if cls.LANG_KEY not in session_state or session_state[cls.LANG_KEY] not in SUPPORTED_LANGS:
+            session_state[cls.LANG_KEY] = DEFAULT_LANG
+        if cls.PAGE_KEY not in session_state or session_state[cls.PAGE_KEY] not in NAV_PAGE_KEYS:
+            session_state[cls.PAGE_KEY] = NAV_PAGE_KEYS[0]
+
+    @classmethod
+    def get_lang(cls, session_state: MutableMapping[str, Any]) -> str:
+        cls.ensure_initialized(session_state)
+        return str(session_state[cls.LANG_KEY])
+
+    @classmethod
+    def set_lang(cls, session_state: MutableMapping[str, Any], lang: str) -> str:
+        cls.ensure_initialized(session_state)
+        if lang in SUPPORTED_LANGS:
+            session_state[cls.LANG_KEY] = lang
+        return str(session_state[cls.LANG_KEY])
+
+    @classmethod
+    def get_page_key(cls, session_state: MutableMapping[str, Any]) -> str:
+        cls.ensure_initialized(session_state)
+        return str(session_state[cls.PAGE_KEY])
+
+    @classmethod
+    def set_page_key(cls, session_state: MutableMapping[str, Any], page_key: str) -> str:
+        cls.ensure_initialized(session_state)
+        if page_key in NAV_PAGE_KEYS:
+            session_state[cls.PAGE_KEY] = page_key
+        return str(session_state[cls.PAGE_KEY])
 
     @classmethod
     def set_flash_success(
